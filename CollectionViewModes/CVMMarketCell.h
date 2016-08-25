@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  CVMMarketCell.h
 //  CollectionViewModes
 //
 //  Created by Joshua Caswell on 8/19/16.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface CVMMarketCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel * name;
 
 @end
-

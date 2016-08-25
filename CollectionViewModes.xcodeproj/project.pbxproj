@@ -8,24 +8,38 @@
 
 /* Begin PBXBuildFile section */
 		03E844471D67FB7700760AE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844461D67FB7700760AE0 /* main.m */; };
-		03E8444A1D67FB7700760AE0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844491D67FB7700760AE0 /* AppDelegate.m */; };
-		03E8444D1D67FB7700760AE0 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8444C1D67FB7700760AE0 /* ViewController.m */; };
-		03E844501D67FB7700760AE0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E8444E1D67FB7700760AE0 /* Main.storyboard */; };
+		03E8444A1D67FB7700760AE0 /* CVMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844491D67FB7700760AE0 /* CVMAppDelegate.m */; };
 		03E844521D67FB7700760AE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E844511D67FB7700760AE0 /* Assets.xcassets */; };
 		03E844551D67FB7700760AE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E844531D67FB7700760AE0 /* LaunchScreen.storyboard */; };
+		03E8445D1D6801D800760AE0 /* MarketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E8445C1D6801D800760AE0 /* MarketCell.xib */; };
+		03E844601D6802B000760AE0 /* CVMMarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8445F1D6802B000760AE0 /* CVMMarketCell.m */; };
+		03E844631D681FAE00760AE0 /* CVMOverviewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844621D681FAE00760AE0 /* CVMOverviewLayout.m */; };
+		03E844661D6D42B800760AE0 /* CVMFullscreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844651D6D42B800760AE0 /* CVMFullscreenLayout.m */; };
+		03E844681D6D455500760AE0 /* SwitchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E844671D6D455500760AE0 /* SwitchView.xib */; };
+		03E8446B1D6E73BE00760AE0 /* CVMCollectionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8446A1D6E73BE00760AE0 /* CVMCollectionDataSource.m */; };
+		03E8446E1D6ECB2B00760AE0 /* CVMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8446D1D6ECB2B00760AE0 /* CVMCollectionViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		03E844421D67FB7700760AE0 /* CollectionViewModes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewModes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E844461D67FB7700760AE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		03E844481D67FB7700760AE0 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		03E844491D67FB7700760AE0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		03E8444B1D67FB7700760AE0 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		03E8444C1D67FB7700760AE0 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		03E8444F1D67FB7700760AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		03E844481D67FB7700760AE0 /* CVMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVMAppDelegate.h; sourceTree = "<group>"; };
+		03E844491D67FB7700760AE0 /* CVMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CVMAppDelegate.m; sourceTree = "<group>"; };
 		03E844511D67FB7700760AE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03E844541D67FB7700760AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03E844561D67FB7700760AE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03E8445C1D6801D800760AE0 /* MarketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketCell.xib; sourceTree = "<group>"; };
+		03E8445E1D6802B000760AE0 /* CVMMarketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMMarketCell.h; sourceTree = "<group>"; };
+		03E8445F1D6802B000760AE0 /* CVMMarketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMMarketCell.m; sourceTree = "<group>"; };
+		03E844611D681FAE00760AE0 /* CVMOverviewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMOverviewLayout.h; sourceTree = "<group>"; };
+		03E844621D681FAE00760AE0 /* CVMOverviewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMOverviewLayout.m; sourceTree = "<group>"; };
+		03E844641D6D42B800760AE0 /* CVMFullscreenLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMFullscreenLayout.h; sourceTree = "<group>"; };
+		03E844651D6D42B800760AE0 /* CVMFullscreenLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMFullscreenLayout.m; sourceTree = "<group>"; };
+		03E844671D6D455500760AE0 /* SwitchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchView.xib; sourceTree = "<group>"; };
+		03E844691D6E73BE00760AE0 /* CVMCollectionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMCollectionDataSource.h; sourceTree = "<group>"; };
+		03E8446A1D6E73BE00760AE0 /* CVMCollectionDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMCollectionDataSource.m; sourceTree = "<group>"; };
+		03E8446C1D6ECB2B00760AE0 /* CVMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMCollectionViewController.h; sourceTree = "<group>"; };
+		03E8446D1D6ECB2B00760AE0 /* CVMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMCollectionViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +72,20 @@
 		03E844441D67FB7700760AE0 /* CollectionViewModes */ = {
 			isa = PBXGroup;
 			children = (
-				03E844481D67FB7700760AE0 /* AppDelegate.h */,
-				03E844491D67FB7700760AE0 /* AppDelegate.m */,
-				03E8444B1D67FB7700760AE0 /* ViewController.h */,
-				03E8444C1D67FB7700760AE0 /* ViewController.m */,
-				03E8444E1D67FB7700760AE0 /* Main.storyboard */,
+				03E844481D67FB7700760AE0 /* CVMAppDelegate.h */,
+				03E844491D67FB7700760AE0 /* CVMAppDelegate.m */,
+				03E8446C1D6ECB2B00760AE0 /* CVMCollectionViewController.h */,
+				03E8446D1D6ECB2B00760AE0 /* CVMCollectionViewController.m */,
+				03E844691D6E73BE00760AE0 /* CVMCollectionDataSource.h */,
+				03E8446A1D6E73BE00760AE0 /* CVMCollectionDataSource.m */,
+				03E844611D681FAE00760AE0 /* CVMOverviewLayout.h */,
+				03E844621D681FAE00760AE0 /* CVMOverviewLayout.m */,
+				03E844641D6D42B800760AE0 /* CVMFullscreenLayout.h */,
+				03E844651D6D42B800760AE0 /* CVMFullscreenLayout.m */,
+				03E8445E1D6802B000760AE0 /* CVMMarketCell.h */,
+				03E8445F1D6802B000760AE0 /* CVMMarketCell.m */,
+				03E844671D6D455500760AE0 /* SwitchView.xib */,
+				03E8445C1D6801D800760AE0 /* MarketCell.xib */,
 				03E844511D67FB7700760AE0 /* Assets.xcassets */,
 				03E844531D67FB7700760AE0 /* LaunchScreen.storyboard */,
 				03E844561D67FB7700760AE0 /* Info.plist */,
@@ -137,9 +160,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03E844681D6D455500760AE0 /* SwitchView.xib in Resources */,
+				03E8445D1D6801D800760AE0 /* MarketCell.xib in Resources */,
 				03E844551D67FB7700760AE0 /* LaunchScreen.storyboard in Resources */,
 				03E844521D67FB7700760AE0 /* Assets.xcassets in Resources */,
-				03E844501D67FB7700760AE0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -150,23 +174,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03E8444D1D67FB7700760AE0 /* ViewController.m in Sources */,
-				03E8444A1D67FB7700760AE0 /* AppDelegate.m in Sources */,
+				03E8444A1D67FB7700760AE0 /* CVMAppDelegate.m in Sources */,
+				03E844601D6802B000760AE0 /* CVMMarketCell.m in Sources */,
+				03E844631D681FAE00760AE0 /* CVMOverviewLayout.m in Sources */,
+				03E8446B1D6E73BE00760AE0 /* CVMCollectionDataSource.m in Sources */,
+				03E8446E1D6ECB2B00760AE0 /* CVMCollectionViewController.m in Sources */,
 				03E844471D67FB7700760AE0 /* main.m in Sources */,
+				03E844661D6D42B800760AE0 /* CVMFullscreenLayout.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		03E8444E1D67FB7700760AE0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				03E8444F1D67FB7700760AE0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		03E844531D67FB7700760AE0 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -265,6 +285,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CollectionViewModes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WoolSweaterSoft.CollectionViewModes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -276,6 +297,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CollectionViewModes/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = WoolSweaterSoft.CollectionViewModes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
