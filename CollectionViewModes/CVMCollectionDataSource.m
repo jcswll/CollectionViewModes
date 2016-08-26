@@ -9,9 +9,10 @@
 #import "CVMCollectionDataSource.h"
 #import "CVMMarketCell.h"
 
-static NSString * names[] = {@"Groceria Abbandando", 
-                             @"Mercado de Luis", 
+static NSString * names[] = {@"Groceria Abbandando",
+                             @"Mercado de Luis",
                              @"Klaus Lebensmittelmarkt"};
+/////////////////////////////////////////////////////////////////////////////
 
 @implementation CVMCollectionDataSource
 

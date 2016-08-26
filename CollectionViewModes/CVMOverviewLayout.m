@@ -8,10 +8,17 @@
 
 #import "CVMOverviewLayout.h"
 
+@interface CVMOverviewLayout ()
+
+- (void)updateSizes;
+
+@end
+
 @implementation CVMOverviewLayout
 {
     NSInteger numItems;
-    CGSize itemSize;
+    CGSize derivedItemSize;
+    CGSize layoutSize;
 }
 
 - (id)init
@@ -20,15 +27,9 @@
     if( !self ) return nil;
     
     [self setScrollDirection:UICollectionViewScrollDirectionVertical];
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    itemSize = CGSizeMake(screenSize.width / 4,
-                          screenSize.height / 4);
-    [self setItemSize:itemSize];
-    [self setMinimumLineSpacing:itemSize.width / 3];
-    [self setMinimumInteritemSpacing:itemSize.width / 3];
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(50, itemSize.width / 3,
-                                                 50, itemSize.width / 3);
-    [self setSectionInset:sectionInset];
+    layoutSize = [[UIScreen mainScreen] bounds].size;
+    [self updateSizes];
+    
     [self setFooterReferenceSize:CGSizeMake(0, 100)];
     [self setSectionFootersPinToVisibleBounds:YES];
     
@@ -52,5 +53,23 @@
    return attrs;
 }
 
+- (void)willTransitionToSize:(CGSize)size
+{
+    [self invalidateLayout];
+    layoutSize = size;
+    [self updateSizes];
+}
+
+- (void)updateSizes
+{
+    derivedItemSize = CGSizeMake(layoutSize.width / 4,
+                          layoutSize.height / 4);
+    [self setItemSize:derivedItemSize];
+    [self setMinimumLineSpacing:derivedItemSize.width / 3];
+    [self setMinimumInteritemSpacing:derivedItemSize.width / 3];
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(50, derivedItemSize.width / 3,
+                                                 50, derivedItemSize.width / 3);
+    [self setSectionInset:sectionInset];
+}
 
 @end

@@ -11,6 +11,7 @@
 @implementation CVMFullscreenLayout
 {
     NSInteger numItems;
+    CGSize layoutSize;
 }
 
 - (id)init
@@ -19,8 +20,8 @@
     if( !self ) return nil;
     
     [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    [self setItemSize:screenSize];
+    layoutSize = [[UIScreen mainScreen] bounds].size;
+    [self setItemSize:layoutSize];
     // "Line" spacing is between _columns_ for horizontal scrolling
     [self setMinimumLineSpacing:0];
     [self setSectionInset:UIEdgeInsetsZero];
@@ -39,25 +40,14 @@
 
 - (CGSize)collectionViewContentSize
 {
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    return CGSizeMake(screenSize.width * numItems, screenSize.height);
+    return CGSizeMake(layoutSize.width * numItems, layoutSize.height);
 }
-//
-//- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind
-//                                                                    atIndexPath:(NSIndexPath *)indexPath
-//{
-//   UICollectionViewLayoutAttributes * attrs;
-//   attrs = [super layoutAttributesForSupplementaryViewOfKind:elementKind
-//                                                 atIndexPath:indexPath];
-//   if( ![elementKind isEqualToString:UICollectionElementKindSectionFooter] ){
-//       return attrs;
-//   }
-//
-//   CGRect visibleRect = [[self collectionView] bounds];
-//   [attrs setFrame:CGRectMake(0, visibleRect.size.height - 100,
-//                              visibleRect.size.width, 100)];
-//
-//   return attrs;
-//}
+
+- (void)willTransitionToSize:(CGSize)size
+{
+    [self invalidateLayout];
+    layoutSize = size;
+    [self setItemSize:layoutSize];
+}
 
 @end

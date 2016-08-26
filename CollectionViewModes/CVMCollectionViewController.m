@@ -10,6 +10,7 @@
 #import "CVMFullscreenLayout.h"
 #import "CVMOverviewLayout.h"
 #import "CVMCollectionDataSource.h"
+#import "CVMRotatableLayout.h"
 
 @interface CVMCollectionViewController ()
 
@@ -67,11 +68,14 @@
     [self setInOverview:![self inOverview]];
 }
 
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+- (void)viewWillTransitionToSize:(CGSize)size
+       withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
 {
-    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
-    [[self fullscreenLayout] invalidateLayout];
-    [[self overviewLayout] invalidateLayout];
+    [super viewWillTransitionToSize:size
+          withTransitionCoordinator:coordinator];
+    
+    [[self overviewLayout] willTransitionToSize:size];
+    [[self fullscreenLayout] willTransitionToSize:size];    
 }
 
 @end
