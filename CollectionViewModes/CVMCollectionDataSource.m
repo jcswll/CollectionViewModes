@@ -9,6 +9,11 @@
 #import "CVMCollectionDataSource.h"
 #import "CVMMarketCell.h"
 
+static NSString * const kMarketCellNibName = @"MarketCell";
+static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
+static NSString * const kSwitchViewNibName = @"SwitchView";
+static NSString * const kSwitchViewReuseIdentifier = @"SwitchView";
+
 static NSString * names[] = {@"Groceria Abbandando",
                              @"Mercado de Luis",
                              @"Klaus Lebensmittelmarkt",
@@ -17,6 +22,20 @@ static NSString * names[] = {@"Groceria Abbandando",
 /////////////////////////////////////////////////////////////////////////////
 
 @implementation CVMCollectionDataSource
+                             
+- (void)registerViewsWithCollectionView:(UICollectionView*)collectionView
+{
+    UINib * cellNib = [UINib nibWithNibName:kMarketCellNibName
+                                     bundle:nil];
+    [collectionView registerNib:cellNib
+                  forCellWithReuseIdentifier:kMarketCellReuseIdentifier];
+    
+    UINib * footerNib = [UINib nibWithNibName:kSwitchViewNibName
+                                       bundle:nil];
+    [collectionView registerNib:footerNib
+                  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
+                         withReuseIdentifier:kSwitchViewReuseIdentifier];
+}
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
@@ -28,7 +47,7 @@ static NSString * names[] = {@"Groceria Abbandando",
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CVMMarketCell * cell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:@"Market"
+        [collectionView dequeueReusableCellWithReuseIdentifier:kMarketCellReuseIdentifier
                                                   forIndexPath:indexPath];
     [[cell name] setText:names[[indexPath row]]];
     [cell layoutIfNeeded];
@@ -42,7 +61,7 @@ static NSString * names[] = {@"Groceria Abbandando",
 {
     UICollectionReusableView * switchView =
         [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                                           withReuseIdentifier:@"Switch"
+                                           withReuseIdentifier:kSwitchViewReuseIdentifier
                                                   forIndexPath:indexPath];
 
     return switchView;

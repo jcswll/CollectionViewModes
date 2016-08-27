@@ -33,20 +33,11 @@
     [controller setInOverview:NO];
     [controller setFullscreenLayout:fullscreenLayout];
     [controller setOverviewLayout:[CVMOverviewLayout new]];
-    
-    UINib * cellNib = [UINib nibWithNibName:@"MarketCell" bundle:nil];
-    [[controller collectionView] registerNib:cellNib
-                  forCellWithReuseIdentifier:@"Market"];
-    
-    UINib * footerNib = [UINib nibWithNibName:@"SwitchView"
-                                       bundle:nil];
-    [[controller collectionView] registerNib:footerNib
-                  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                         withReuseIdentifier:@"Switch"];
-    
-    [[controller collectionView] setBackgroundColor:[UIColor greenColor]];
-    
     [controller setDataSource:dataSource];
+    
+    [dataSource registerViewsWithCollectionView:[controller collectionView]];
+
+    [[controller collectionView] setBackgroundColor:[UIColor greenColor]];
     [[controller collectionView] setDataSource:dataSource];
     [[controller collectionView] setDelegate:controller];
     
@@ -66,7 +57,7 @@
 }
 
 - (void)viewWillTransitionToSize:(CGSize)size
-       withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator
+       withTransitionCoordinator:(id)coordinator
 {
     [super viewWillTransitionToSize:size
           withTransitionCoordinator:coordinator];

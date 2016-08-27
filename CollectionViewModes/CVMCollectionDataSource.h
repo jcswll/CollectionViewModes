@@ -10,4 +10,6 @@
 
 @interface CVMCollectionDataSource : NSObject <UICollectionViewDataSource>
 
+- (void)registerViewsWithCollectionView:(UICollectionView*)collectionView;
+
 @end
