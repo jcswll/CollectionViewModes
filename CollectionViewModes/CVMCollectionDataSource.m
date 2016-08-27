@@ -11,7 +11,9 @@
 
 static NSString * names[] = {@"Groceria Abbandando",
                              @"Mercado de Luis",
-                             @"Klaus Lebensmittelmarkt"};
+                             @"Klaus Lebensmittelmarkt",
+                             @"Épicerie Pierre",
+                             @"Doyle's Grocery"};
 /////////////////////////////////////////////////////////////////////////////
 
 @implementation CVMCollectionDataSource
@@ -19,7 +21,7 @@ static NSString * names[] = {@"Groceria Abbandando",
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
-    return 3;
+    return sizeof(names) / sizeof(NSString *);
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView

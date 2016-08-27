@@ -58,23 +58,6 @@
     transitioningAway = NO;
 }
 
-- (UICollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind
-                                                                    atIndexPath:(NSIndexPath *)indexPath
-{
-   UICollectionViewLayoutAttributes * attrs;
-   attrs = [super layoutAttributesForSupplementaryViewOfKind:elementKind
-                                                 atIndexPath:indexPath];
-   if( ![elementKind isEqualToString:UICollectionElementKindSectionFooter] ){
-       return attrs;
-   }
-
-   CGRect visibleRect = [[self collectionView] bounds];
-   [attrs setFrame:CGRectMake(0, visibleRect.size.height - 100,
-                              visibleRect.size.width, 100)];
-
-   return attrs;
-}
-
 - (void)willTransitionToSize:(CGSize)size
 {
     [self invalidateLayout];
