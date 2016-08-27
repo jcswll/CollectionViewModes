@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -14,7 +15,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="366" height="456"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UgV-uH-xdV">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="UgV-uH-xdV">
                         <rect key="frame" x="162" y="217" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -25,8 +26,11 @@
             </view>
             <color key="backgroundColor" red="0.31000000239999997" green="0.66100001339999892" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UgV-uH-xdV" secondAttribute="trailing" constant="10" id="23d-fb-vav"/>
                 <constraint firstItem="UgV-uH-xdV" firstAttribute="centerY" secondItem="Slr-Pk-IjE" secondAttribute="centerY" id="3FG-NC-8gh"/>
                 <constraint firstItem="UgV-uH-xdV" firstAttribute="centerX" secondItem="Slr-Pk-IjE" secondAttribute="centerX" id="9mo-QB-wYS"/>
+                <constraint firstItem="UgV-uH-xdV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Slr-Pk-IjE" secondAttribute="leading" constant="10" id="fAD-bI-8If"/>
+                <constraint firstItem="UgV-uH-xdV" firstAttribute="width" relation="lessThanOrEqual" secondItem="Slr-Pk-IjE" secondAttribute="width" multiplier="0.75" id="jOy-1a-GfM"/>
             </constraints>
             <size key="customSize" width="366" height="456"/>
             <connections>
