@@ -8,7 +8,6 @@
 
 @import UIKit;
 
-@interface CVMCollectionDataSource : NSObject <UICollectionViewDelegate,
-                                               UICollectionViewDataSource>
+@interface CVMCollectionDataSource : NSObject <UICollectionViewDataSource>
 
 @end

@@ -11,4 +11,6 @@
 
 @interface CVMFullscreenLayout : UICollectionViewFlowLayout <CVMRotatableLayout>
 
+- (void)updatePageIndex;
+
 @end

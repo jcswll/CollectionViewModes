@@ -12,6 +12,11 @@
 {
     NSInteger numItems;
     CGSize layoutSize;
+    NSUInteger pageIndex;
+    // The other layout's prepareForLayout will be called during the
+    // transition, sometimes _after_ ours. We must manually track which
+    // layout is incoming for decisions about paging.
+    BOOL transitioningAway;
 }
 
 - (id)init
@@ -34,8 +39,27 @@
 - (void)prepareLayout
 {
     [super prepareLayout];
-
+    
     numItems = [[self collectionView] numberOfItemsInSection:0];
+    
+    if( !transitioningAway ){
+        [[self collectionView] setPagingEnabled:YES];
+    }
+}
+
+- (void)prepareForTransitionToLayout:(UICollectionViewLayout *)newLayout
+{
+    transitioningAway = YES;
+}
+
+-(void)prepareForTransitionFromLayout:(UICollectionViewLayout *)oldLayout
+{
+    transitioningAway = NO;
+}
+
+- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)_
+{
+    return CGPointMake(pageIndex * layoutSize.width, 0);
 }
 
 - (CGSize)collectionViewContentSize
@@ -48,6 +72,14 @@
     [self invalidateLayout];
     layoutSize = size;
     [self setItemSize:layoutSize];
+}
+
+- (void)updatePageIndex
+{
+    CGFloat xOffset = [[self collectionView] contentOffset].x;
+    CGFloat width = layoutSize.width;
+    
+    pageIndex = floor(xOffset / width);
 }
 
 @end

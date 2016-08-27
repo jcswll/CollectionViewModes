@@ -12,12 +12,12 @@
 #import "CVMCollectionDataSource.h"
 #import "CVMRotatableLayout.h"
 
-@interface CVMCollectionViewController ()
+@interface CVMCollectionViewController () <UICollectionViewDelegate>
 
 @property (strong, nonatomic, nullable) CVMFullscreenLayout * fullscreenLayout;
 @property (strong, nonatomic, nullable) CVMOverviewLayout * overviewLayout;
-@property (assign, nonatomic) BOOL inOverview;
 @property (strong, nonatomic, nullable) CVMCollectionDataSource * dataSource;
+@property (assign, nonatomic) BOOL inOverview;
 
 @end
 
@@ -45,11 +45,10 @@
                          withReuseIdentifier:@"Switch"];
     
     [[controller collectionView] setBackgroundColor:[UIColor greenColor]];
-    [[controller collectionView] setPagingEnabled:YES];
     
     [controller setDataSource:dataSource];
     [[controller collectionView] setDataSource:dataSource];
-    [[controller collectionView] setDelegate:dataSource];
+    [[controller collectionView] setDelegate:controller];
     
     return controller;
 }
@@ -59,11 +58,9 @@
     UICollectionViewFlowLayout * newLayout = [self inOverview] ?
                                              [self fullscreenLayout] :
                                              [self overviewLayout];
-    BOOL shouldPageAfterToggle = [self inOverview];
 
     [[self collectionView] setCollectionViewLayout:newLayout
                                               animated:YES];
-    [[self collectionView] setPagingEnabled:shouldPageAfterToggle];
 
     [self setInOverview:![self inOverview]];
 }
@@ -75,7 +72,25 @@
           withTransitionCoordinator:coordinator];
     
     [[self overviewLayout] willTransitionToSize:size];
-    [[self fullscreenLayout] willTransitionToSize:size];    
+    [[self fullscreenLayout] willTransitionToSize:size];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
+                  willDecelerate:(BOOL)willDecelerate
+{
+    // Wait until scrolling has settled to calculate page
+    if( willDecelerate ) return;
+    
+    if( _inOverview ) return;
+    
+    [[self fullscreenLayout] updatePageIndex];
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    if( _inOverview ) return;
+    
+    [[self fullscreenLayout] updatePageIndex];
 }
 
 @end
