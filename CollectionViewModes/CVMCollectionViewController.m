@@ -72,16 +72,25 @@
     // Wait until scrolling has settled to calculate page
     if( willDecelerate ) return;
     
-    if( _inOverview ) return;
+    if( [self inOverview]  ) return;
     
     [[self fullscreenLayout] updatePageIndex];
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if( _inOverview ) return;
+    if( [self inOverview]  ) return;
     
     [[self fullscreenLayout] updatePageIndex];
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+        didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if( ![self inOverview] ) return;
+    
+    [[self fullscreenLayout] setPageIndex:[indexPath row]];
+    [self toggleLayout];
 }
 
 @end

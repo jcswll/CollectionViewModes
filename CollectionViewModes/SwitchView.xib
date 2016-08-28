@@ -11,8 +11,8 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="98"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <button opaque="NO" tag="171" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CcA-Cq-rk3">
-                    <rect key="frame" x="19" y="34" width="47" height="30"/>
+                <button opaque="NO" tag="171" contentMode="scaleToFill" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CcA-Cq-rk3">
+                    <rect key="frame" x="22" y="46" width="47" height="30"/>
                     <state key="normal" title="Switch"/>
                     <connections>
                         <action selector="toggleLayout" destination="-1" eventType="touchUpInside" id="pmW-s2-7N5"/>
@@ -21,8 +21,10 @@
             </subviews>
             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="CcA-Cq-rk3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="19" id="H3Z-Au-ooA"/>
-                <constraint firstAttribute="bottom" secondItem="CcA-Cq-rk3" secondAttribute="bottom" constant="34" id="xEm-f6-J5k"/>
+                <constraint firstItem="CcA-Cq-rk3" firstAttribute="top" relation="greaterThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="top" constant="22" id="8iL-M0-yTK"/>
+                <constraint firstItem="CcA-Cq-rk3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="22" id="H3Z-Au-ooA"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="CcA-Cq-rk3" secondAttribute="trailing" constant="22" id="aqN-RK-bSZ"/>
+                <constraint firstAttribute="bottom" secondItem="CcA-Cq-rk3" secondAttribute="bottom" constant="22" id="xEm-f6-J5k"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>

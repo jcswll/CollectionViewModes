@@ -35,7 +35,7 @@
     layoutSize = [[UIScreen mainScreen] bounds].size;
     [self updateSizes];
     
-    [self setFooterReferenceSize:CGSizeMake(0, 100)];
+    [self setFooterReferenceSize:CGSizeMake(0, 74)];
     [self setSectionFootersPinToVisibleBounds:YES];
     
     return self;

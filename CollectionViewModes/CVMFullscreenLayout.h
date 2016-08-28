@@ -11,6 +11,8 @@
 
 @interface CVMFullscreenLayout : UICollectionViewFlowLayout <CVMRotatableLayout>
 
+@property (assign, nonatomic) NSUInteger pageIndex;
+
 - (void)updatePageIndex;
 
 @end

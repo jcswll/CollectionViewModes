@@ -12,7 +12,6 @@
 {
     NSInteger numItems;
     CGSize layoutSize;
-    NSUInteger pageIndex;
     // The other layout's prepareForLayout will be called during the
     // transition, sometimes _after_ ours. We must manually track which
     // layout is incoming for decisions about paging.
@@ -30,7 +29,7 @@
     // "Line" spacing is between _columns_ for horizontal scrolling
     [self setMinimumLineSpacing:0];
     [self setSectionInset:UIEdgeInsetsZero];
-    [self setFooterReferenceSize:CGSizeMake(100, 0)];
+    [self setFooterReferenceSize:CGSizeMake(91, 0)];
     [self setSectionFootersPinToVisibleBounds:YES];
     
     return self;
@@ -59,7 +58,7 @@
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)_
 {
-    return CGPointMake(pageIndex * layoutSize.width, 0);
+    return CGPointMake([self pageIndex] * layoutSize.width, 0);
 }
 
 - (CGSize)collectionViewContentSize
@@ -79,7 +78,7 @@
     CGFloat xOffset = [[self collectionView] contentOffset].x;
     CGFloat width = layoutSize.width;
     
-    pageIndex = floor(xOffset / width);
+    [self setPageIndex:floor(xOffset / width)];
 }
 
 @end
