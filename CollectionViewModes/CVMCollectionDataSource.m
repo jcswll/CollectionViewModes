@@ -11,14 +11,15 @@
 
 static NSString * const kMarketCellNibName = @"MarketCell";
 static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
-static NSString * const kSwitchViewNibName = @"SwitchView";
-static NSString * const kSwitchViewReuseIdentifier = @"SwitchView";
 
 static NSString * names[] = {@"Groceria Abbandando",
                              @"Mercado de Luis",
                              @"Klaus Lebensmittelmarkt",
                              @"Épicerie Pierre",
-                             @"Doyle's Grocery"};
+                             @"Doyle's Grocery",
+                             @"Hans supermarkt",
+                             @"Mercearia de João",
+                             @"प्रसाद की किराने की दुकान"};
 /////////////////////////////////////////////////////////////////////////////
 
 @implementation CVMCollectionDataSource
@@ -29,12 +30,6 @@ static NSString * names[] = {@"Groceria Abbandando",
                                      bundle:nil];
     [collectionView registerNib:cellNib
                   forCellWithReuseIdentifier:kMarketCellReuseIdentifier];
-    
-    UINib * footerNib = [UINib nibWithNibName:kSwitchViewNibName
-                                       bundle:nil];
-    [collectionView registerNib:footerNib
-                  forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                         withReuseIdentifier:kSwitchViewReuseIdentifier];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
@@ -53,18 +48,6 @@ static NSString * names[] = {@"Groceria Abbandando",
     [cell layoutIfNeeded];
 
     return cell;
-}
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
-           viewForSupplementaryElementOfKind:(NSString *)kind
-                                 atIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionReusableView * switchView =
-        [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                                           withReuseIdentifier:kSwitchViewReuseIdentifier
-                                                  forIndexPath:indexPath];
-
-    return switchView;
 }
 
 @end
