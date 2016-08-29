@@ -10,61 +10,64 @@
 
 @interface CVMOverviewLayout ()
 
+@property (assign, nonatomic) CGSize layoutSize;
+
 - (void)updateSizes;
 
 @end
 
 @implementation CVMOverviewLayout
 {
-    NSInteger numItems;
     CGSize derivedItemSize;
-    CGSize layoutSize;
-    // The other layout's prepareForLayout will be called during the
-    // transition, sometimes _after_ ours. We must manually track which
-    // layout is incoming for decisions about paging.
-    BOOL transitioningAway;
 }
 
-- (id)init
++ (instancetype)layoutWithSize:(CGSize)layoutSize
+{
+    return [[self alloc] initWithLayoutSize:layoutSize];
+}
+
+- (id)initWithLayoutSize:(CGSize)layoutSize
 {
     self = [super init];
     if( !self ) return nil;
     
     [self setScrollDirection:UICollectionViewScrollDirectionVertical];
-    layoutSize = [[UIScreen mainScreen] bounds].size;
+    _layoutSize = layoutSize;
     [self updateSizes];
     
     return self;
 }
 
--(void)prepareLayout
+- (void)setLayoutSize:(CGSize)layoutSize
 {
-    if( !transitioningAway ){
-        [[self collectionView] setPagingEnabled:NO];
-    }
-}
-
-- (void)prepareForTransitionToLayout:(UICollectionViewLayout *)newLayout
-{
-    transitioningAway = YES;
+    _layoutSize = layoutSize;
+    [self updateSizes];
 }
 
 -(void)prepareForTransitionFromLayout:(UICollectionViewLayout *)oldLayout
 {
-    transitioningAway = NO;
+    [super prepareForTransitionFromLayout:oldLayout];
+    
+    [self setLayoutSize:[[self collectionView] bounds].size];
+    
+    [[self collectionView] setPagingEnabled:NO];
 }
 
-- (void)willTransitionToSize:(CGSize)size
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
-    [self invalidateLayout];
-    layoutSize = size;
-    [self updateSizes];
+    CGSize newSize = newBounds.size;
+    BOOL sizeDidChange = !CGSizeEqualToSize([self layoutSize], newSize);
+    if( sizeDidChange ){
+        [self setLayoutSize:newSize];
+    }
+    
+    return sizeDidChange;
 }
 
 - (void)updateSizes
 {
-    derivedItemSize = CGSizeMake(layoutSize.width / 4,
-                                 layoutSize.height / 4);
+    derivedItemSize = CGSizeMake([self layoutSize].width / 4,
+                                 [self layoutSize].height / 4);
     [self setItemSize:derivedItemSize];
     [self setMinimumLineSpacing:derivedItemSize.width / 3];
     [self setMinimumInteritemSpacing:derivedItemSize.width / 3];

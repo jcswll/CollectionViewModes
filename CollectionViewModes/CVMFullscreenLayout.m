@@ -8,24 +8,30 @@
 
 #import "CVMFullscreenLayout.h"
 
+@interface CVMFullscreenLayout ()
+
+@property (assign, nonatomic) CGSize layoutSize;
+
+@end
+
 @implementation CVMFullscreenLayout
 {
     NSInteger numItems;
-    CGSize layoutSize;
-    // The other layout's prepareForLayout will be called during the
-    // transition, sometimes _after_ ours. We must manually track which
-    // layout is incoming for decisions about paging.
-    BOOL transitioningAway;
 }
 
-- (id)init
++ (instancetype)layoutWithSize:(CGSize)layoutSize
+{
+    return [[self alloc] initWithLayoutSize:layoutSize];
+}
+
+- (id)initWithLayoutSize:(CGSize)layoutSize
 {
     self = [super init];
     if( !self ) return nil;
     
     [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    layoutSize = [[UIScreen mainScreen] bounds].size;
-    [self setItemSize:layoutSize];
+    _layoutSize = layoutSize;
+    [self setItemSize:_layoutSize];
     // "Line" spacing is between _columns_ for horizontal scrolling
     [self setMinimumLineSpacing:0];
     [self setSectionInset:UIEdgeInsetsZero];
@@ -33,48 +39,54 @@
     return self;
 }
 
+- (void)setLayoutSize:(CGSize)layoutSize
+{
+    _layoutSize = layoutSize;
+    [self setItemSize:_layoutSize];
+}
+
 - (void)prepareLayout
 {
     [super prepareLayout];
     
     numItems = [[self collectionView] numberOfItemsInSection:0];
+}
+
+- (void)prepareForTransitionFromLayout:(UICollectionViewLayout *)oldLayout
+{
+    [super prepareForTransitionFromLayout:oldLayout];
     
-    if( !transitioningAway ){
-        [[self collectionView] setPagingEnabled:YES];
-    }
-}
-
-- (void)prepareForTransitionToLayout:(UICollectionViewLayout *)newLayout
-{
-    transitioningAway = YES;
-}
-
--(void)prepareForTransitionFromLayout:(UICollectionViewLayout *)oldLayout
-{
-    transitioningAway = NO;
+    [self setLayoutSize:[[self collectionView] bounds].size];
+    
+    [[self collectionView] setPagingEnabled:YES];
 }
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)_
 {
-    return CGPointMake([self pageIndex] * layoutSize.width, 0);
+    return CGPointMake([self pageIndex] * [self layoutSize].width, 0);
 }
 
 - (CGSize)collectionViewContentSize
 {
-    return CGSizeMake(layoutSize.width * numItems, layoutSize.height);
+    return CGSizeMake([self layoutSize].width * numItems, 
+                      [self layoutSize].height);
 }
 
-- (void)willTransitionToSize:(CGSize)size
+- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
 {
-    [self invalidateLayout];
-    layoutSize = size;
-    [self setItemSize:layoutSize];
+    CGSize newSize = newBounds.size;
+    BOOL sizeDidChange = !CGSizeEqualToSize([self layoutSize], newSize);
+    if( sizeDidChange ){
+        [self setLayoutSize:newSize];
+    }
+    
+    return sizeDidChange;
 }
 
 - (void)updatePageIndex
 {
     CGFloat xOffset = [[self collectionView] contentOffset].x;
-    CGFloat width = layoutSize.width;
+    CGFloat width = [self layoutSize].width;
     
     [self setPageIndex:floor(xOffset / width)];
 }

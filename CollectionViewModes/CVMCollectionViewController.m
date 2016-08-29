@@ -10,7 +10,6 @@
 #import "CVMFullscreenLayout.h"
 #import "CVMOverviewLayout.h"
 #import "CVMCollectionDataSource.h"
-#import "CVMRotatableLayout.h"
 #import "UIView+WSSSimpleConstraints.h"
 
 @interface CVMCollectionViewController () <UICollectionViewDelegate>
@@ -28,7 +27,10 @@
 + (id)controllerWithDataSource:(CVMCollectionDataSource *)dataSource
                          frame:(CGRect)frame
 {
-    CVMFullscreenLayout * fullscreenLayout = [CVMFullscreenLayout new];
+    CVMFullscreenLayout * fullscreenLayout =
+        [CVMFullscreenLayout layoutWithSize:frame.size];
+    CVMOverviewLayout * overviewLayout =
+        [CVMOverviewLayout layoutWithSize:frame.size];
     
     UICollectionView * collectionView =
         [[UICollectionView alloc] initWithFrame:frame
@@ -39,7 +41,7 @@
     [controller setCollectionView:collectionView];
     [controller setInOverview:NO];
     [controller setFullscreenLayout:fullscreenLayout];
-    [controller setOverviewLayout:[CVMOverviewLayout new]];
+    [controller setOverviewLayout:overviewLayout];
     [controller setDataSource:dataSource];
     
     [dataSource registerViewsWithCollectionView:collectionView];
@@ -78,16 +80,6 @@
                                               animated:YES];
 
     [self setInOverview:![self inOverview]];
-}
-
-- (void)viewWillTransitionToSize:(CGSize)size
-       withTransitionCoordinator:(id)coordinator
-{
-    [super viewWillTransitionToSize:size
-          withTransitionCoordinator:coordinator];
-    
-    [[self overviewLayout] willTransitionToSize:size];
-    [[self fullscreenLayout] willTransitionToSize:size];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView

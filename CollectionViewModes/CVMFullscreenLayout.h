@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CVMRotatableLayout.h"
 
-@interface CVMFullscreenLayout : UICollectionViewFlowLayout <CVMRotatableLayout>
+@interface CVMFullscreenLayout : UICollectionViewFlowLayout
+
++ (instancetype)layoutWithSize:(CGSize)layoutSize;
 
 @property (assign, nonatomic) NSUInteger pageIndex;
 

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CVMRotatableLayout.h"
 
-@interface CVMOverviewLayout : UICollectionViewFlowLayout <CVMRotatableLayout>
+@interface CVMOverviewLayout : UICollectionViewFlowLayout
+
++ (instancetype)layoutWithSize:(CGSize)layoutSize;
 
 @end

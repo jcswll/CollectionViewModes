@@ -40,7 +40,6 @@
 		03E8446A1D6E73BE00760AE0 /* CVMCollectionDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMCollectionDataSource.m; sourceTree = "<group>"; };
 		03E8446C1D6ECB2B00760AE0 /* CVMCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMCollectionViewController.h; sourceTree = "<group>"; };
 		03E8446D1D6ECB2B00760AE0 /* CVMCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMCollectionViewController.m; sourceTree = "<group>"; };
-		03E844701D6FAFEE00760AE0 /* CVMRotatableLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMRotatableLayout.h; sourceTree = "<group>"; };
 		03E8448A1D73A94000760AE0 /* CVMCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CVMCollectionViewController.xib; sourceTree = "<group>"; };
 		03E8448C1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WSSSimpleConstraints.h"; sourceTree = "<group>"; };
 		03E8448D1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WSSSimpleConstraints.m"; sourceTree = "<group>"; };
@@ -83,7 +82,6 @@
 				03E8448A1D73A94000760AE0 /* CVMCollectionViewController.xib */,
 				03E844691D6E73BE00760AE0 /* CVMCollectionDataSource.h */,
 				03E8446A1D6E73BE00760AE0 /* CVMCollectionDataSource.m */,
-				03E844701D6FAFEE00760AE0 /* CVMRotatableLayout.h */,
 				03E844611D681FAE00760AE0 /* CVMOverviewLayout.h */,
 				03E844621D681FAE00760AE0 /* CVMOverviewLayout.m */,
 				03E844641D6D42B800760AE0 /* CVMFullscreenLayout.h */,
