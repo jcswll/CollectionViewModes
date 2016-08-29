@@ -24,8 +24,7 @@
 
 @implementation CVMCollectionViewController
 
-+ (id)controllerWithDataSource:(CVMCollectionDataSource *)dataSource
-                         frame:(CGRect)frame
++ (id)controllerUsingFrame:(CGRect)frame
 {
     CVMFullscreenLayout * fullscreenLayout =
         [CVMFullscreenLayout layoutWithSize:frame.size];
@@ -35,6 +34,8 @@
     UICollectionView * collectionView =
         [[UICollectionView alloc] initWithFrame:frame
                            collectionViewLayout:fullscreenLayout];
+    
+    CVMCollectionDataSource * dataSource = [CVMCollectionDataSource new];
     
     CVMCollectionViewController * controller = [self new];
     

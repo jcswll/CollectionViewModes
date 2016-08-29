@@ -12,7 +12,6 @@
 
 @interface CVMCollectionViewController : UIViewController
 
-+ (instancetype)controllerWithDataSource:(CVMCollectionDataSource *)dataSource
-                                   frame:(CGRect)frame;
++ (instancetype)controllerUsingFrame:(CGRect)frame;
 
 @end

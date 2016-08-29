@@ -16,15 +16,13 @@
         didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
+    
+    CVMCollectionViewController * controller =
+        [CVMCollectionViewController controllerUsingFrame:windowFrame];
+    
     UIWindow * window = [[UIWindow alloc] initWithFrame:windowFrame];
     
     [self setWindow:window];
-    
-    CVMCollectionDataSource * dataSource = [CVMCollectionDataSource new];
-    
-    CVMCollectionViewController * controller =
-        [CVMCollectionViewController controllerWithDataSource:dataSource
-                                                        frame:windowFrame];
     
     [[self window] setRootViewController:controller];
     [[self window] makeKeyAndVisible];
