@@ -17,6 +17,7 @@
 @implementation CVMFullscreenLayout
 {
     NSInteger numItems;
+    BOOL didInitialLayout;
 }
 
 + (instancetype)layoutWithSize:(CGSize)layoutSize
@@ -50,6 +51,13 @@
     [super prepareLayout];
     
     numItems = [[self collectionView] numberOfItemsInSection:0];
+    
+    // This is not an appropriate place to set paging during transitions,
+    // because both layouts recieve this message in indeterminate order.
+    // However, there is no transition on initial presentation.
+    if( !didInitialLayout ){
+        [[self collectionView] setPagingEnabled:YES];
+    }
 }
 
 - (void)prepareForTransitionFromLayout:(UICollectionViewLayout *)oldLayout
