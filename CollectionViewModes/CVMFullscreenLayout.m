@@ -57,6 +57,7 @@
     // However, there is no transition on initial presentation.
     if( !didInitialLayout ){
         [[self collectionView] setPagingEnabled:YES];
+        didInitialLayout = YES;
     }
 }
 
