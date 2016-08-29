@@ -11,6 +11,7 @@
 #import "CVMOverviewLayout.h"
 #import "CVMCollectionDataSource.h"
 #import "CVMRotatableLayout.h"
+#import "UIView+WSSSimpleConstraints.h"
 
 @interface CVMCollectionViewController () <UICollectionViewDelegate>
 
@@ -63,38 +64,8 @@
     [[self view] sendSubviewToBack:collectionView];
     
     [collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSArray * constraints = @[
-          [NSLayoutConstraint constraintWithItem:collectionView
-                                       attribute:NSLayoutAttributeHeight
-                                       relatedBy:NSLayoutRelationEqual
-                                          toItem:[self view]
-                                       attribute:NSLayoutAttributeHeight
-                                      multiplier:1.0
-                                        constant:0.0],
-          [NSLayoutConstraint constraintWithItem:collectionView
-                                       attribute:NSLayoutAttributeTop
-                                       relatedBy:NSLayoutRelationEqual
-                                          toItem:[self view]
-                                       attribute:NSLayoutAttributeTop
-                                      multiplier:1.0
-                                        constant:0.0],
-          [NSLayoutConstraint constraintWithItem:collectionView
-                                       attribute:NSLayoutAttributeLeading
-                                       relatedBy:NSLayoutRelationEqual
-                                          toItem:[self view]
-                                       attribute:NSLayoutAttributeLeading
-                                      multiplier:1.0
-                                        constant:0.0],
-          [NSLayoutConstraint constraintWithItem:collectionView
-                                       attribute:NSLayoutAttributeWidth
-                                       relatedBy:NSLayoutRelationEqual
-                                          toItem:[self view]
-                                       attribute:NSLayoutAttributeWidth
-                                      multiplier:1.0
-                                        constant:0.0]];
-    
-    [NSLayoutConstraint activateConstraints:constraints];
-    
+    [collectionView WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
+    [collectionView WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];    
 }
 
 - (IBAction)toggleLayout

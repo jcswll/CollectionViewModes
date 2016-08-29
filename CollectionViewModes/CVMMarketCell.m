@@ -7,6 +7,7 @@
 //
 
 #import "CVMMarketCell.h"
+#import "UIView+WSSSimpleConstraints.h"
 
 @implementation CVMMarketCell
 {
@@ -31,38 +32,11 @@
 
 - (void)constructConstraints
 {
-    UIView * contentView = [self contentView];
-    NSArray * constraints = @[
-              [NSLayoutConstraint constraintWithItem:contentView
-                                           attribute:NSLayoutAttributeHeight
-                                           relatedBy:NSLayoutRelationEqual
-                                              toItem:self
-                                           attribute:NSLayoutAttributeHeight
-                                          multiplier:1.0
-                                            constant:0.0],
-              [NSLayoutConstraint constraintWithItem:contentView
-                                           attribute:NSLayoutAttributeTop
-                                           relatedBy:NSLayoutRelationEqual
-                                              toItem:self
-                                           attribute:NSLayoutAttributeTop
-                                          multiplier:1.0
-                                            constant:0.0],
-              [NSLayoutConstraint constraintWithItem:contentView
-                                           attribute:NSLayoutAttributeLeading
-                                           relatedBy:NSLayoutRelationEqual
-                                              toItem:self
-                                           attribute:NSLayoutAttributeLeading
-                                          multiplier:1.0
-                                            constant:0.0],
-              [NSLayoutConstraint constraintWithItem:contentView
-                                           attribute:NSLayoutAttributeWidth
-                                           relatedBy:NSLayoutRelationEqual
-                                              toItem:self
-                                           attribute:NSLayoutAttributeWidth
-                                          multiplier:1.0
-                                            constant:0.0]];
+    [[self contentView] 
+        WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
+    [[self contentView] 
+        WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
     
-    [NSLayoutConstraint activateConstraints:constraints];
     haveConstraints = YES;
 }
 
