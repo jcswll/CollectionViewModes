@@ -8,9 +8,6 @@
 
 #import "CVMOverviewLayout.h"
 
-static NSString * const kSwitchViewNibName = @"SwitchView";
-static NSString * const kSwitchViewKind = @"SwitchView";
-
 @interface CVMOverviewLayout ()
 
 - (void)updateSizes;
@@ -37,10 +34,6 @@ static NSString * const kSwitchViewKind = @"SwitchView";
     layoutSize = [[UIScreen mainScreen] bounds].size;
     [self updateSizes];
     
-    UINib * footerNib = [UINib nibWithNibName:kSwitchViewNibName
-                                       bundle:nil];
-    [self registerNib:footerNib forDecorationViewOfKind:kSwitchViewKind];
-    
     return self;
 }
 
@@ -59,65 +52,6 @@ static NSString * const kSwitchViewKind = @"SwitchView";
 -(void)prepareForTransitionFromLayout:(UICollectionViewLayout *)oldLayout
 {
     transitioningAway = NO;
-}
-
--(NSArray<UICollectionViewLayoutAttributes *> *)
-  layoutAttributesForElementsInRect:(CGRect)rect
-{
-    NSArray * attributes = [super layoutAttributesForElementsInRect:rect];
-    
-    if( !CGRectIntersectsRect(rect, [self rectForSwitchView]) ) {
-        
-        return attributes;
-    }
-    
-    static NSIndexPath * kIndexPathZero = nil;
-    if( !kIndexPathZero ) {
-        kIndexPathZero = [NSIndexPath indexPathForRow:0 inSection:0];
-    }
-    
-    UICollectionViewLayoutAttributes * switchAttributes =
-        [self layoutAttributesForDecorationViewOfKind:kSwitchViewKind
-                                          atIndexPath:kIndexPathZero];
-    
-    // Without this adjustment, the switch does not float with
-    // scrolling; its frame is fixed to the value from the last layout pass
-    CGRect switchFrame = [switchAttributes frame];
-    CGFloat boundsBottom = CGRectGetMaxY([[self collectionView] bounds]);
-    
-    if( boundsBottom != CGRectGetMaxY(switchFrame) ){
-        switchFrame.origin.y = boundsBottom - switchFrame.size.height;
-        [switchAttributes setFrame:switchFrame];
-    }
-    
-    return [attributes arrayByAddingObject:switchAttributes];
-}
-
-- (UICollectionViewLayoutAttributes *)
-    layoutAttributesForDecorationViewOfKind:(NSString *)elementKind
-                                atIndexPath:(NSIndexPath *)indexPath
-{
-    
-    UICollectionViewLayoutAttributes * attributes;
-    attributes =
-        [UICollectionViewLayoutAttributes
-            layoutAttributesForDecorationViewOfKind:elementKind
-                                      withIndexPath:indexPath];
-    [attributes setFrame:[self rectForSwitchView]];
-    [attributes setZIndex:NSIntegerMax];
-    
-    return attributes;
-}
-
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds
-{
-    return YES;
-}
-
-- (CGRect)rectForSwitchView
-{
-    CGRect bounds = [[self collectionView] bounds];
-    return CGRectMake(bounds.origin.x, bounds.size.height - 74, 91, 74);
 }
 
 - (void)willTransitionToSize:(CGSize)size

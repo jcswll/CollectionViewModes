@@ -23,7 +23,8 @@
     CVMCollectionDataSource * dataSource = [CVMCollectionDataSource new];
     
     CVMCollectionViewController * controller =
-        [CVMCollectionViewController controllerWithDataSource:dataSource];
+        [CVMCollectionViewController controllerWithDataSource:dataSource
+                                                        frame:windowFrame];
     
     [[self window] setRootViewController:controller];
     [[self window] makeKeyAndVisible];

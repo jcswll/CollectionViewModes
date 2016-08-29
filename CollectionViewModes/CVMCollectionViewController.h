@@ -10,8 +10,9 @@
 
 @class CVMCollectionDataSource;
 
-@interface CVMCollectionViewController : UICollectionViewController
+@interface CVMCollectionViewController : UIViewController
 
-+ controllerWithDataSource:(CVMCollectionDataSource *)dataSource;
++ (instancetype)controllerWithDataSource:(CVMCollectionDataSource *)dataSource
+                                   frame:(CGRect)frame;
 
 @end

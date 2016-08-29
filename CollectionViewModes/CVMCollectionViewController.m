@@ -17,6 +17,7 @@
 @property (strong, nonatomic, nullable) CVMFullscreenLayout * fullscreenLayout;
 @property (strong, nonatomic, nullable) CVMOverviewLayout * overviewLayout;
 @property (strong, nonatomic, nullable) CVMCollectionDataSource * dataSource;
+@property (strong, nonatomic, nullable) UICollectionView * collectionView;
 @property (assign, nonatomic) BOOL inOverview;
 
 @end
@@ -24,24 +25,76 @@
 @implementation CVMCollectionViewController
 
 + (id)controllerWithDataSource:(CVMCollectionDataSource *)dataSource
+                         frame:(CGRect)frame
 {
     CVMFullscreenLayout * fullscreenLayout = [CVMFullscreenLayout new];
     
-    CVMCollectionViewController * controller =
-        [[self alloc] initWithCollectionViewLayout:fullscreenLayout];
+    UICollectionView * collectionView =
+        [[UICollectionView alloc] initWithFrame:frame
+                           collectionViewLayout:fullscreenLayout];
     
+    CVMCollectionViewController * controller = [self new];
+    
+    [controller setCollectionView:collectionView];
     [controller setInOverview:NO];
     [controller setFullscreenLayout:fullscreenLayout];
     [controller setOverviewLayout:[CVMOverviewLayout new]];
     [controller setDataSource:dataSource];
     
-    [dataSource registerViewsWithCollectionView:[controller collectionView]];
+    [dataSource registerViewsWithCollectionView:collectionView];
 
-    [[controller collectionView] setBackgroundColor:[UIColor greenColor]];
-    [[controller collectionView] setDataSource:dataSource];
-    [[controller collectionView] setDelegate:controller];
+    [collectionView setBackgroundColor:[UIColor greenColor]];
+    [collectionView setDataSource:dataSource];
+    [collectionView setDelegate:controller];
     
     return controller;
+}
+
+- (instancetype)init
+{
+    return [super initWithNibName:nil bundle:nil];
+}
+
+- (void)setCollectionView:(UICollectionView *)collectionView
+{
+    _collectionView = collectionView;
+    
+    [[self view] addSubview:collectionView];
+    [[self view] sendSubviewToBack:collectionView];
+    
+    [collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
+    NSArray * constraints = @[
+          [NSLayoutConstraint constraintWithItem:collectionView
+                                       attribute:NSLayoutAttributeHeight
+                                       relatedBy:NSLayoutRelationEqual
+                                          toItem:[self view]
+                                       attribute:NSLayoutAttributeHeight
+                                      multiplier:1.0
+                                        constant:0.0],
+          [NSLayoutConstraint constraintWithItem:collectionView
+                                       attribute:NSLayoutAttributeTop
+                                       relatedBy:NSLayoutRelationEqual
+                                          toItem:[self view]
+                                       attribute:NSLayoutAttributeTop
+                                      multiplier:1.0
+                                        constant:0.0],
+          [NSLayoutConstraint constraintWithItem:collectionView
+                                       attribute:NSLayoutAttributeLeading
+                                       relatedBy:NSLayoutRelationEqual
+                                          toItem:[self view]
+                                       attribute:NSLayoutAttributeLeading
+                                      multiplier:1.0
+                                        constant:0.0],
+          [NSLayoutConstraint constraintWithItem:collectionView
+                                       attribute:NSLayoutAttributeWidth
+                                       relatedBy:NSLayoutRelationEqual
+                                          toItem:[self view]
+                                       attribute:NSLayoutAttributeWidth
+                                      multiplier:1.0
+                                        constant:0.0]];
+    
+    [NSLayoutConstraint activateConstraints:constraints];
+    
 }
 
 - (IBAction)toggleLayout
