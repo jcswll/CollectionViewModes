@@ -106,6 +106,9 @@
         CGPoint pressPoint = [recognizer locationInView:[self collectionView]];
         NSIndexPath * pressPath =
             [[self collectionView] indexPathForItemAtPoint:pressPoint];
+
+        if( !pressPath ) return;
+        
         [[self collectionView]
             beginInteractiveMovementForItemAtIndexPath:pressPath];
     }
