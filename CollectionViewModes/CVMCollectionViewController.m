@@ -39,7 +39,8 @@
         [[UICollectionView alloc] initWithFrame:frame
                            collectionViewLayout:fullscreenLayout];
     
-    CVMCollectionDataSource * dataSource = [CVMCollectionDataSource new];
+    CVMCollectionDataSource * dataSource =
+        [CVMCollectionDataSource dataSourceForView:collectionView];
     
     CVMCollectionViewController * controller = [self new];
     
@@ -49,8 +50,6 @@
     [controller setFullscreenLayout:fullscreenLayout];
     [controller setOverviewLayout:overviewLayout];
     [controller setDataSource:dataSource];
-    
-    [dataSource registerViewsWithCollectionView:collectionView];
 
     [collectionView setBackgroundColor:[UIColor greenColor]];
     [collectionView setDataSource:dataSource];

@@ -12,12 +12,23 @@
 static NSString * const kMarketCellNibName = @"MarketCell";
 static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
 
+@interface CVMCollectionDataSource ()
+
+- (void)registerViewsWithCollectionView:(UICollectionView *)collectionView;
+
+@end
+
 @implementation CVMCollectionDataSource
 {
     NSMutableArray * names;
 }
+
++ (instancetype)dataSourceForView:(UICollectionView *)collectionView    
+{
+    return [[self alloc] initForView:collectionView];
+}
                              
-- (instancetype)init
+- (instancetype)initForView:(UICollectionView *)collectionView
 {
     self = [super init];
     if( !self ) return nil;
@@ -30,7 +41,8 @@ static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
                @"Hans supermarkt",
                @"Mercearia de João",
                @"प्रसाद की किराने की दुकान"] mutableCopy];
-    
+
+    [self registerViewsWithCollectionView:collectionView];
     
     return self;
 }
