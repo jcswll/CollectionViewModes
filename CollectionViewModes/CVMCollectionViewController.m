@@ -14,11 +14,15 @@
 
 @interface CVMCollectionViewController () <UICollectionViewDelegate>
 
+@property (strong, nonatomic, nullable) UIGestureRecognizer * itemMovementRecognizer;
 @property (strong, nonatomic, nullable) CVMFullscreenLayout * fullscreenLayout;
 @property (strong, nonatomic, nullable) CVMOverviewLayout * overviewLayout;
 @property (strong, nonatomic, nullable) CVMCollectionDataSource * dataSource;
 @property (strong, nonatomic, nullable) UICollectionView * collectionView;
 @property (assign, nonatomic) BOOL inOverview;
+
+- (IBAction)toggleLayout;
+- (void)itemMovementStateChanged:(UILongPressGestureRecognizer *)recognizer;
 
 @end
 
@@ -40,6 +44,7 @@
     CVMCollectionViewController * controller = [self new];
     
     [controller setCollectionView:collectionView];
+    [[controller itemMovementRecognizer] setEnabled:NO];
     [controller setInOverview:NO];
     [controller setFullscreenLayout:fullscreenLayout];
     [controller setOverviewLayout:overviewLayout];
@@ -54,11 +59,6 @@
     return controller;
 }
 
-- (instancetype)init
-{
-    return [super initWithNibName:nil bundle:nil];
-}
-
 - (void)setCollectionView:(UICollectionView *)collectionView
 {
     _collectionView = collectionView;
@@ -68,7 +68,9 @@
     
     [collectionView setTranslatesAutoresizingMaskIntoConstraints:NO];
     [collectionView WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
-    [collectionView WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];    
+    [collectionView WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
+    
+    [collectionView addGestureRecognizer:[self itemMovementRecognizer]];
 }
 
 - (IBAction)toggleLayout
@@ -76,11 +78,51 @@
     UICollectionViewFlowLayout * newLayout = [self inOverview] ?
                                              [self fullscreenLayout] :
                                              [self overviewLayout];
-
+    
+    [self setInOverview:![self inOverview]];
+    
     [[self collectionView] setCollectionViewLayout:newLayout
                                               animated:YES];
+    [[self itemMovementRecognizer] setEnabled:[self inOverview]];
+}
 
-    [self setInOverview:![self inOverview]];
+- (UIGestureRecognizer *)itemMovementRecognizer
+{
+    if( !_itemMovementRecognizer ){
+        
+        _itemMovementRecognizer =
+            [[UILongPressGestureRecognizer alloc]
+                initWithTarget:self
+                        action:@selector(itemMovementStateChanged:)];
+    }
+    
+    return _itemMovementRecognizer;
+}
+
+- (void)itemMovementStateChanged:(UILongPressGestureRecognizer *)recognizer
+{
+    UIGestureRecognizerState state = [recognizer state];
+    if( state == UIGestureRecognizerStateBegan ){
+        
+        CGPoint pressPoint = [recognizer locationInView:[self collectionView]];
+        NSIndexPath * pressPath =
+            [[self collectionView] indexPathForItemAtPoint:pressPoint];
+        [[self collectionView]
+            beginInteractiveMovementForItemAtIndexPath:pressPath];
+    }
+    else if( state == UIGestureRecognizerStateChanged ){
+        
+        CGPoint movePoint = [recognizer locationInView:[self collectionView]];
+        [[self collectionView] updateInteractiveMovementTargetPosition:movePoint];
+    }
+    else if( state == UIGestureRecognizerStateEnded ){
+        
+        [[self collectionView] endInteractiveMovement];
+    }
+    else if( state == UIGestureRecognizerStateCancelled ){
+        
+        [[self collectionView] cancelInteractiveMovement];
+    }
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView

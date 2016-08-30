@@ -12,17 +12,28 @@
 static NSString * const kMarketCellNibName = @"MarketCell";
 static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
 
-static NSString * names[] = {@"Groceria Abbandando",
-                             @"Mercado de Luis",
-                             @"Klaus Lebensmittelmarkt",
-                             @"Épicerie Pierre",
-                             @"Doyle's Grocery",
-                             @"Hans supermarkt",
-                             @"Mercearia de João",
-                             @"प्रसाद की किराने की दुकान"};
-/////////////////////////////////////////////////////////////////////////////
-
 @implementation CVMCollectionDataSource
+{
+    NSMutableArray * names;
+}
+                             
+- (instancetype)init
+{
+    self = [super init];
+    if( !self ) return nil;
+    
+    names = [@[@"Groceria Abbandando",
+               @"Mercado de Luis",
+               @"Klaus Lebensmittelmarkt",
+               @"Épicerie Pierre",
+               @"Doyle's Grocery",
+               @"Hans supermarkt",
+               @"Mercearia de João",
+               @"प्रसाद की किराने की दुकान"] mutableCopy];
+    
+    
+    return self;
+}
                              
 - (void)registerViewsWithCollectionView:(UICollectionView*)collectionView
 {
@@ -35,7 +46,7 @@ static NSString * names[] = {@"Groceria Abbandando",
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
-    return sizeof(names) / sizeof(NSString *);
+    return [names count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -48,6 +59,17 @@ static NSString * names[] = {@"Groceria Abbandando",
     [cell layoutIfNeeded];
 
     return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView
+   moveItemAtIndexPath:(NSIndexPath *)sourceIndexPath
+           toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSUInteger sourceIndex = [sourceIndexPath row];
+    NSUInteger destinationIndex = [destinationIndexPath row];
+    NSString * movingItem = names[sourceIndex];
+    [names removeObjectAtIndex:sourceIndex];
+    [names insertObject:movingItem atIndex:destinationIndex];
 }
 
 @end
