@@ -7,6 +7,7 @@
 //
 
 #import "CVMOverviewLayout.h"
+#import "CVMShadowLayoutAttributes.h"
 
 @interface CVMOverviewLayout ()
 
@@ -62,6 +63,21 @@
     }
     
     return sizeDidChange;
+}
+
+- (CVMShadowLayoutAttributes *)
+    layoutAttributesForInteractivelyMovingItemAtIndexPath:(NSIndexPath *)indexPath
+                                       withTargetPosition:(CGPoint)position
+{
+    UICollectionViewLayoutAttributes * attrs =
+        [super layoutAttributesForInteractivelyMovingItemAtIndexPath:indexPath
+                                                  withTargetPosition:position];
+    CVMShadowLayoutAttributes * shadowAttrs =
+        [CVMShadowLayoutAttributes copyOf:attrs withShadow:YES];
+    [shadowAttrs setTransform:CGAffineTransformMakeScale(1.1, 1.1)];
+    [shadowAttrs setAlpha:0.85];
+    
+    return shadowAttrs;
 }
 
 - (void)updateSizes

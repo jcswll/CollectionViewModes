@@ -14,7 +14,7 @@
 
 @interface CVMCollectionViewController () <UICollectionViewDelegate>
 
-@property (strong, nonatomic, nullable) UIGestureRecognizer * itemMovementRecognizer;
+@property (strong, nonatomic, nullable) UILongPressGestureRecognizer * itemMovementRecognizer;
 @property (strong, nonatomic, nullable) CVMFullscreenLayout * fullscreenLayout;
 @property (strong, nonatomic, nullable) CVMOverviewLayout * overviewLayout;
 @property (strong, nonatomic, nullable) CVMCollectionDataSource * dataSource;
@@ -85,7 +85,7 @@
     [[self itemMovementRecognizer] setEnabled:[self inOverview]];
 }
 
-- (UIGestureRecognizer *)itemMovementRecognizer
+- (UILongPressGestureRecognizer *)itemMovementRecognizer
 {
     if( !_itemMovementRecognizer ){
         
@@ -93,6 +93,7 @@
             [[UILongPressGestureRecognizer alloc]
                 initWithTarget:self
                         action:@selector(itemMovementStateChanged:)];
+        [_itemMovementRecognizer setMinimumPressDuration:0.3];
     }
     
     return _itemMovementRecognizer;
@@ -111,6 +112,11 @@
         
         [[self collectionView]
             beginInteractiveMovementForItemAtIndexPath:pressPath];
+        // Force immediate application of special layout attributes
+        [UIView animateWithDuration:0.125 animations:^{
+            [[self collectionView] 
+                updateInteractiveMovementTargetPosition:pressPoint];
+        }];
     }
     else if( state == UIGestureRecognizerStateChanged ){
         

@@ -19,6 +19,7 @@
 		03E8446E1D6ECB2B00760AE0 /* CVMCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8446D1D6ECB2B00760AE0 /* CVMCollectionViewController.m */; };
 		03E8448B1D73A94000760AE0 /* CVMCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E8448A1D73A94000760AE0 /* CVMCollectionViewController.xib */; };
 		03E8448E1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8448D1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m */; };
+		03E844D01D7549C700760AE0 /* CVMShadowLayoutAttributes.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844CF1D7549C700760AE0 /* CVMShadowLayoutAttributes.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,8 @@
 		03E8448A1D73A94000760AE0 /* CVMCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CVMCollectionViewController.xib; sourceTree = "<group>"; };
 		03E8448C1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WSSSimpleConstraints.h"; sourceTree = "<group>"; };
 		03E8448D1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WSSSimpleConstraints.m"; sourceTree = "<group>"; };
+		03E844CE1D7549C700760AE0 /* CVMShadowLayoutAttributes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMShadowLayoutAttributes.h; sourceTree = "<group>"; };
+		03E844CF1D7549C700760AE0 /* CVMShadowLayoutAttributes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMShadowLayoutAttributes.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +91,8 @@
 				03E844651D6D42B800760AE0 /* CVMFullscreenLayout.m */,
 				03E8445E1D6802B000760AE0 /* CVMMarketCell.h */,
 				03E8445F1D6802B000760AE0 /* CVMMarketCell.m */,
+				03E844CE1D7549C700760AE0 /* CVMShadowLayoutAttributes.h */,
+				03E844CF1D7549C700760AE0 /* CVMShadowLayoutAttributes.m */,
 				03E8445C1D6801D800760AE0 /* MarketCell.xib */,
 				03E8448C1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.h */,
 				03E8448D1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m */,
@@ -183,6 +188,7 @@
 				03E844601D6802B000760AE0 /* CVMMarketCell.m in Sources */,
 				03E844631D681FAE00760AE0 /* CVMOverviewLayout.m in Sources */,
 				03E8448E1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m in Sources */,
+				03E844D01D7549C700760AE0 /* CVMShadowLayoutAttributes.m in Sources */,
 				03E8446B1D6E73BE00760AE0 /* CVMCollectionDataSource.m in Sources */,
 				03E8446E1D6ECB2B00760AE0 /* CVMCollectionViewController.m in Sources */,
 				03E844471D67FB7700760AE0 /* main.m in Sources */,
