@@ -18,8 +18,10 @@
 @end
 
 @implementation CVMMarketCell
+
+- (void)awakeFromNib
 {
-    BOOL haveConstraints;
+    [self constructConstraints];
 }
 
 - (void)prepareForReuse
@@ -28,25 +30,12 @@
     [self setDisplaysShadow:NO];
 }
 
-- (void)didMoveToSuperview
-{
-    // Will also be called when removing from hierarchy; superview will be nil
-    if( [self superview] && !haveConstraints ){
-        
-        [[self contentView] setTranslatesAutoresizingMaskIntoConstraints:NO];
-        [self constructConstraints];
-        [self layoutIfNeeded];
-    }
-}
-
 - (void)constructConstraints
 {
     [[self contentView] 
         WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
     [[self contentView] 
         WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
-    
-    haveConstraints = YES;
 }
 
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttrs
