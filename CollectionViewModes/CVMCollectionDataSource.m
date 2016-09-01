@@ -12,7 +12,11 @@
 static NSString * const kMarketCellNibName = @"MarketCell";
 static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
 
+typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
+
 @interface CVMCollectionDataSource ()
+
+@property (strong, nonatomic, nonnull) IndexPathTransform postMovementIndexPathTransform;
 
 - (void)registerViewsWithCollectionView:(UICollectionView *)collectionView;
 
@@ -42,6 +46,10 @@ static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
                @"Mercearia de João",
                @"प्रसाद की किराने की दुकान"] mutableCopy];
 
+    _postMovementIndexPathTransform = ^NSIndexPath * (NSIndexPath * path){
+        return path;
+    };
+
     [self registerViewsWithCollectionView:collectionView];
     
     return self;
@@ -53,6 +61,12 @@ static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
                                      bundle:nil];
     [collectionView registerNib:cellNib
                   forCellWithReuseIdentifier:kMarketCellReuseIdentifier];
+}
+
+- (NSIndexPath *)postMovementIndexPath:(NSIndexPath *)path
+{
+    IndexPathTransform transform = [self postMovementIndexPathTransform];
+    return transform(path);
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView
@@ -82,6 +96,40 @@ static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
     NSString * movingItem = names[sourceIndex];
     [names removeObjectAtIndex:sourceIndex];
     [names insertObject:movingItem atIndex:destinationIndex];
+    
+    [self setPostMovementIndexPathTransform:^NSIndexPath * (NSIndexPath * path){
+        
+        if( [path row] == sourceIndex ){
+            return destinationIndexPath;
+        }
+        
+        BOOL beforeSourceIndex = [path row] < sourceIndex;
+        BOOL atDestIndex = [path row] == destinationIndex;
+        
+        if( atDestIndex ){
+            // At destination, before source: moved right; after: left
+            NSUInteger offset = beforeSourceIndex ? 1 : -1;
+            return [NSIndexPath indexPathForRow:[path row] + offset
+                                      inSection:[path section]];
+        }
+        
+        BOOL beforeDestIndex = [path row] < destinationIndex;
+        
+        // Before source, after destination: moved right
+        if( beforeSourceIndex && !beforeDestIndex ){
+            return [NSIndexPath indexPathForRow:[path row] + 1
+                                      inSection:[path section]];
+        }
+        
+        // After source, before destination: moved left
+        if( !beforeSourceIndex && beforeDestIndex ){
+            return [NSIndexPath indexPathForRow:[path row] - 1
+                                      inSection:[path section]];
+        }
+        
+        // Either both before or both after: has not moved
+        return path;
+    }];
 }
 
 @end

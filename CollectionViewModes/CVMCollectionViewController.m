@@ -23,6 +23,7 @@
 
 - (IBAction)toggleLayout;
 - (void)itemMovementStateChanged:(UILongPressGestureRecognizer *)recognizer;
+- (void)updatePageIndexAfterMove;
 
 @end
 
@@ -126,11 +127,20 @@
     else if( state == UIGestureRecognizerStateEnded ){
         
         [[self collectionView] endInteractiveMovement];
+        [self updatePageIndexAfterMove];
     }
     else if( state == UIGestureRecognizerStateCancelled ){
         
         [[self collectionView] cancelInteractiveMovement];
     }
+}
+
+- (void)updatePageIndexAfterMove
+{
+   NSIndexPath * previousPath = [[self fullscreenLayout] pageIndexPath];
+   NSIndexPath * movedPath =
+       [[self dataSource] postMovementIndexPath:previousPath];
+   [[self fullscreenLayout] setPageIndexPath:movedPath];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView
@@ -139,14 +149,14 @@
     // Wait until scrolling has settled to calculate page
     if( willDecelerate ) return;
     
-    if( [self inOverview]  ) return;
+    if( [self inOverview] ) return;
     
     [[self fullscreenLayout] updatePageIndex];
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    if( [self inOverview]  ) return;
+    if( [self inOverview] ) return;
     
     [[self fullscreenLayout] updatePageIndex];
 }
@@ -156,7 +166,7 @@
 {
     if( ![self inOverview] ) return;
     
-    [[self fullscreenLayout] setPageIndex:[indexPath row]];
+    [[self fullscreenLayout] setPageIndexPath:indexPath];
     [self toggleLayout];
 }
 

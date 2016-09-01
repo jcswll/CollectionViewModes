@@ -12,4 +12,6 @@
 
 + (instancetype)dataSourceForView:(UICollectionView *)collectionView;
 
+- (NSIndexPath *)postMovementIndexPath:(NSIndexPath *)path;
+
 @end

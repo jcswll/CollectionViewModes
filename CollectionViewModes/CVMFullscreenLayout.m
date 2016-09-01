@@ -18,6 +18,7 @@
 {
     NSInteger numItems;
     BOOL didInitialLayout;
+    NSUInteger pageIndex;
 }
 
 + (instancetype)layoutWithSize:(CGSize)layoutSize
@@ -30,12 +31,13 @@
     self = [super init];
     if( !self ) return nil;
     
-    [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
-    _layoutSize = layoutSize;
-    [self setItemSize:_layoutSize];
     // "Line" spacing is between _columns_ for horizontal scrolling
     [self setMinimumLineSpacing:0];
     [self setSectionInset:UIEdgeInsetsZero];
+    [self setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    
+    _layoutSize = layoutSize;
+    [self setItemSize:_layoutSize];
    
     return self;
 }
@@ -44,6 +46,17 @@
 {
     _layoutSize = layoutSize;
     [self setItemSize:_layoutSize];
+}
+
+- (NSIndexPath *)pageIndexPath
+{
+    return [NSIndexPath indexPathForItem:pageIndex
+                               inSection:0];
+}
+
+- (void)setPageIndexPath:(NSIndexPath *)indexPath
+{
+    pageIndex = [indexPath item];
 }
 
 - (void)prepareLayout
@@ -72,7 +85,7 @@
 
 - (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)_
 {
-    return CGPointMake([self pageIndex] * [self layoutSize].width, 0);
+    return CGPointMake(pageIndex * [self layoutSize].width, 0);
 }
 
 - (CGSize)collectionViewContentSize
@@ -97,7 +110,7 @@
     CGFloat xOffset = [[self collectionView] contentOffset].x;
     CGFloat width = [self layoutSize].width;
     
-    [self setPageIndex:floor(xOffset / width)];
+    pageIndex = floor(xOffset / width);
 }
 
 @end

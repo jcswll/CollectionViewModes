@@ -10,9 +10,9 @@
 
 @interface CVMFullscreenLayout : UICollectionViewFlowLayout
 
-+ (instancetype)layoutWithSize:(CGSize)layoutSize;
++ (nullable instancetype)layoutWithSize:(CGSize)layoutSize;
 
-@property (assign, nonatomic) NSUInteger pageIndex;
+@property (strong, nonatomic, nonnull) NSIndexPath * pageIndexPath;
 
 - (void)updatePageIndex;
 
