@@ -10,6 +10,7 @@
 
 @interface CVMFullscreenLayout ()
 
+/** The size of the collection view's bounds; used directly for the size of cells. */
 @property (assign, nonatomic) CGSize layoutSize;
 
 @end
@@ -18,6 +19,7 @@
 {
     NSInteger numItems;
     BOOL didInitialLayout;
+    // The index of the currently-displayed cell. Needed (and updated) when returning from overview mode.
     NSUInteger pageIndex;
 }
 
@@ -59,6 +61,14 @@
     pageIndex = [indexPath item];
 }
 
+- (void)updatePageIndex
+{
+    CGFloat xOffset = [[self collectionView] contentOffset].x;
+    CGFloat width = [self layoutSize].width;
+    
+    pageIndex = floor(xOffset / width);
+}
+
 - (void)prepareLayout
 {
     [super prepareLayout];
@@ -90,7 +100,7 @@
 
 - (CGSize)collectionViewContentSize
 {
-    return CGSizeMake([self layoutSize].width * numItems, 
+    return CGSizeMake([self layoutSize].width * numItems,
                       [self layoutSize].height);
 }
 
@@ -103,14 +113,6 @@
     }
     
     return sizeDidChange;
-}
-
-- (void)updatePageIndex
-{
-    CGFloat xOffset = [[self collectionView] contentOffset].x;
-    CGFloat width = [self layoutSize].width;
-    
-    pageIndex = floor(xOffset / width);
 }
 
 @end

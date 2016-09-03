@@ -12,6 +12,7 @@
 
 + (instancetype)dataSourceForView:(UICollectionView *)collectionView;
 
-- (NSIndexPath *)postMovementIndexPath:(NSIndexPath *)path;
+/** The new location of the given index path after items have been rearranged. */
+- (NSIndexPath *)pathAfterMovementForIndexPath:(NSIndexPath *)path;
 
 @end

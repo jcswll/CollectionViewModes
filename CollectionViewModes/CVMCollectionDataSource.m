@@ -16,6 +16,7 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
 
 @interface CVMCollectionDataSource ()
 
+/** This Block captures the most recent item movement info and calculates where a passed-in index path ended up. */
 @property (strong, nonatomic, nonnull) IndexPathTransform postMovementIndexPathTransform;
 
 - (void)registerViewsWithCollectionView:(UICollectionView *)collectionView;
@@ -27,7 +28,7 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
     NSMutableArray * names;
 }
 
-+ (instancetype)dataSourceForView:(UICollectionView *)collectionView    
++ (instancetype)dataSourceForView:(UICollectionView *)collectionView
 {
     return [[self alloc] initForView:collectionView];
 }
@@ -46,6 +47,7 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
                @"Mercearia de João",
                @"प्रसाद की किराने की दुकान"] mutableCopy];
 
+    // Use identity transform until item movement actually occurs.
     _postMovementIndexPathTransform = ^NSIndexPath * (NSIndexPath * path){
         return path;
     };
@@ -59,11 +61,10 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
 {
     UINib * cellNib = [UINib nibWithNibName:kMarketCellNibName
                                      bundle:nil];
-    [collectionView registerNib:cellNib
-                  forCellWithReuseIdentifier:kMarketCellReuseIdentifier];
+    [collectionView registerNib:cellNib forCellWithReuseIdentifier:kMarketCellReuseIdentifier];
 }
 
-- (NSIndexPath *)postMovementIndexPath:(NSIndexPath *)path
+- (NSIndexPath *)pathAfterMovementForIndexPath:(NSIndexPath *)path
 {
     IndexPathTransform transform = [self postMovementIndexPathTransform];
     return transform(path);
@@ -78,10 +79,11 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
                   cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CVMMarketCell * cell =
-        [collectionView dequeueReusableCellWithReuseIdentifier:kMarketCellReuseIdentifier
-                                                  forIndexPath:indexPath];
-    [[cell name] setText:names[[indexPath row]]];
+    CVMMarketCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMarketCellReuseIdentifier
+                                                                     forIndexPath:indexPath];
+    NSUInteger itemIndex = [indexPath item];
+    
+    [[cell name] setText:names[itemIndex]];
     [cell layoutIfNeeded];
 
     return cell;
@@ -94,11 +96,13 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
     NSUInteger sourceIndex = [sourceIndexPath row];
     NSUInteger destinationIndex = [destinationIndexPath row];
     NSString * movingItem = names[sourceIndex];
+    
     [names removeObjectAtIndex:sourceIndex];
     [names insertObject:movingItem atIndex:destinationIndex];
     
     [self setPostMovementIndexPathTransform:^NSIndexPath * (NSIndexPath * path){
         
+        // This is the path of the item that moved.
         if( [path row] == sourceIndex ){
             return destinationIndexPath;
         }
@@ -107,7 +111,7 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
         BOOL atDestIndex = [path row] == destinationIndex;
         
         if( atDestIndex ){
-            // At destination, before source: moved right; after: left
+            // This path was the destination. If before source: it moved right; after source: it moved left
             NSUInteger offset = beforeSourceIndex ? 1 : -1;
             return [NSIndexPath indexPathForRow:[path row] + offset
                                       inSection:[path section]];
@@ -127,7 +131,7 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
                                       inSection:[path section]];
         }
         
-        // Either both before or both after: has not moved
+        // Either both before or both after: index has not changed
         return path;
     }];
 }

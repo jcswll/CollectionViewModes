@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@class CVMCollectionDataSource;
-
 @interface CVMCollectionViewController : UIViewController
 
 + (instancetype)controllerUsingFrame:(CGRect)frame;

@@ -5,7 +5,7 @@
 //  Copyright © 2015 Josh Caswell. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 typedef NS_OPTIONS(NSUInteger, WSSConstraintDirection) {
     WSSConstraintDirectionLeft = 1 << 0,
@@ -21,14 +21,21 @@ typedef NS_OPTIONS(NSUInteger, WSSConstraintDirection) {
 
 @interface UIView (WSSSimpleConstraints)
 
+/** This view and its superview are constrained to have their edges equal in the given directions. */
 - (void)WSSFitToSuperviewInDirections:(WSSConstraintDirection)directions;
 
-- (void)WSSSpaceAtStandardDistanceFromSuperviewInDirections:
-                                            (WSSConstraintDirection)directions;
+/** This view is constrained inset from its superview by the standard distance represented by "-" in the Auto Layout VFL. */
+- (void)WSSSpaceAtStandardDistanceFromSuperviewInDirections:(WSSConstraintDirection)directions;
 
+/** This view is constrained inset from its superview by the given amount in the given directions. */
 - (void)WSSSpaceAtDistance:(CGFloat)space
  fromSuperviewInDirections:(WSSConstraintDirection)directions;
 
+/**
+ * This view and its superview are constrained to have center positions equal in the given directions.
+ *
+ * \c directions must be one or both of \c WSSConstraintDirectionHorizontal and \c WSSConstraintDirectionVertical. 
+ */
 - (void)WSSCenterInSuperviewInDirections:(WSSConstraintDirection)directions;
 
 @end

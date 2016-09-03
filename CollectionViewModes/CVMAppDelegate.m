@@ -7,18 +7,15 @@
 //
 
 #import "CVMAppDelegate.h"
-#import "CVMCollectionDataSource.h"
 #import "CVMCollectionViewController.h"
 
 @implementation CVMAppDelegate
 
-- (BOOL)application:(UIApplication *)application
-        didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     CGRect windowFrame = [[UIScreen mainScreen] bounds];
     
-    CVMCollectionViewController * controller =
-        [CVMCollectionViewController controllerUsingFrame:windowFrame];
+    CVMCollectionViewController * controller = [CVMCollectionViewController controllerUsingFrame:windowFrame];
     
     UIWindow * window = [[UIWindow alloc] initWithFrame:windowFrame];
     

@@ -12,6 +12,7 @@
 
 @interface CVMMarketCell ()
 
+/** Turn layer shadow off or on; this is used during movement in overview mode. */
 - (void)setDisplaysShadow:(BOOL)display;
 - (void)constructConstraints;
 
@@ -30,32 +31,30 @@
     [self setDisplaysShadow:NO];
 }
 
-- (void)constructConstraints
-{
-    [[self contentView] 
-        WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
-    [[self contentView] 
-        WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
-}
-
 - (void)applyLayoutAttributes:(UICollectionViewLayoutAttributes *)layoutAttrs
 {
     BOOL displayShadow = NO;
     if( [layoutAttrs respondsToSelector:@selector(displayShadow)] ){
         displayShadow = [(CVMShadowLayoutAttributes *)layoutAttrs displayShadow];
     }
-        
-    [self setDisplaysShadow:displayShadow];
+    // Shadow value retrieved before passing up just in case super does something stupid with the attributes object
     [super applyLayoutAttributes:layoutAttrs];
+    [self setDisplaysShadow:displayShadow];
 }
 
-- (void)setDisplaysShadow:(BOOL)display
+- (void)setDisplaysShadow:(BOOL)doesDisplay
 {
-    CGFloat opacity = display ? 0.5 : 0.0;
-    BOOL doesMask = !display;
+    CGFloat opacity = doesDisplay ? 0.5 : 0.0;
+    BOOL doesMask = !doesDisplay;
     
     [[self layer] setShadowOpacity:opacity];
     [[self layer] setMasksToBounds:doesMask];
+}
+
+- (void)constructConstraints
+{
+    [[self contentView] WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
+    [[self contentView] WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
 }
 
 @end

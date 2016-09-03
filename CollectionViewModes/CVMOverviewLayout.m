@@ -11,6 +11,7 @@
 
 @interface CVMOverviewLayout ()
 
+/** The collection view's bounds; used to calculate sizes of elements */
 @property (assign, nonatomic) CGSize layoutSize;
 
 - (void)updateSizes;
@@ -18,9 +19,6 @@
 @end
 
 @implementation CVMOverviewLayout
-{
-    CGSize derivedItemSize;
-}
 
 + (instancetype)layoutWithSize:(CGSize)layoutSize
 {
@@ -58,6 +56,7 @@
 {
     CGSize newSize = newBounds.size;
     BOOL sizeDidChange = !CGSizeEqualToSize([self layoutSize], newSize);
+    
     if( sizeDidChange ){
         [self setLayoutSize:newSize];
     }
@@ -65,30 +64,43 @@
     return sizeDidChange;
 }
 
-- (CVMShadowLayoutAttributes *)
-    layoutAttributesForInteractivelyMovingItemAtIndexPath:(NSIndexPath *)indexPath
-                                       withTargetPosition:(CGPoint)position
+- (CVMShadowLayoutAttributes *)layoutAttributesForInteractivelyMovingItemAtIndexPath:(NSIndexPath *)indexPath
+                                                                  withTargetPosition:(CGPoint)position
 {
-    UICollectionViewLayoutAttributes * attrs =
-        [super layoutAttributesForInteractivelyMovingItemAtIndexPath:indexPath
-                                                  withTargetPosition:position];
-    CVMShadowLayoutAttributes * shadowAttrs =
-        [CVMShadowLayoutAttributes copyOf:attrs withShadow:YES];
-    [shadowAttrs setTransform:CGAffineTransformMakeScale(1.1, 1.1)];
-    [shadowAttrs setAlpha:0.85];
+    static const CGFloat kMovingCellOpacity = 0.85;
+    static const CGFloat kMovingCellScale = 1.1;
+    
+    // While an item is being moved, provide special visual effects
+    UICollectionViewLayoutAttributes * attrs = [super layoutAttributesForInteractivelyMovingItemAtIndexPath:indexPath
+                                                                                         withTargetPosition:position];
+    CVMShadowLayoutAttributes * shadowAttrs = [CVMShadowLayoutAttributes copyOf:attrs
+                                                                     withShadow:YES];
+    
+    [shadowAttrs setTransform:CGAffineTransformMakeScale(kMovingCellScale, kMovingCellScale)];
+    [shadowAttrs setAlpha:kMovingCellOpacity];
     
     return shadowAttrs;
 }
 
 - (void)updateSizes
 {
-    derivedItemSize = CGSizeMake([self layoutSize].width / 4,
-                                 [self layoutSize].height / 4);
+    /** Reduction factor for item size, from layout size. */
+    static const CGFloat kItemSizeDivisor = 4;
+    /** Reduction factor for line and column spacing, from item size. */
+    static const CGFloat kSpacingDivisor = 3;
+    /** Inset for top and bottom of section */
+    static const CGFloat kSectionInsetVertical = 50;
+    
+    /** The size of a cell, based on layout size. */
+    CGSize derivedItemSize = CGSizeMake([self layoutSize].width / kItemSizeDivisor,
+                                        [self layoutSize].height / kItemSizeDivisor);
+    CGFloat horizontalSpacing = derivedItemSize.width / kSpacingDivisor;
+    UIEdgeInsets sectionInset = UIEdgeInsetsMake(kSectionInsetVertical, horizontalSpacing,
+                                                 kSectionInsetVertical, horizontalSpacing);
+    
     [self setItemSize:derivedItemSize];
-    [self setMinimumLineSpacing:derivedItemSize.width / 3];
-    [self setMinimumInteritemSpacing:derivedItemSize.width / 3];
-    UIEdgeInsets sectionInset = UIEdgeInsetsMake(50, derivedItemSize.width / 3,
-                                                 50, derivedItemSize.width / 3);
+    [self setMinimumLineSpacing:horizontalSpacing];
+    [self setMinimumInteritemSpacing:horizontalSpacing];
     [self setSectionInset:sectionInset];
 }
 

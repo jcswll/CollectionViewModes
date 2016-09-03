@@ -13,8 +13,7 @@
 + (instancetype)copyOf:(UICollectionViewLayoutAttributes *)attrs
             withShadow:(BOOL)displayShadow
 {
-    CVMShadowLayoutAttributes * newAttrs =
-        [self layoutAttributesForCellWithIndexPath:[attrs indexPath]];
+    CVMShadowLayoutAttributes * newAttrs = [self layoutAttributesForCellWithIndexPath:[attrs indexPath]];
     
     [newAttrs setFrame:[attrs frame]];
     [newAttrs setBounds:[attrs bounds]];
@@ -34,8 +33,8 @@
 
 - (NSUInteger)hash
 {
-    NSUInteger shadowHash = [self displayShadow] ?
-                            [@"YES" hash] : [@"NO" hash];
+    NSUInteger shadowHash = [self displayShadow] ? [@"YES" hash] : [@"NO" hash];
+    
     return [super hash] ^ shadowHash;
 }
 
@@ -53,6 +52,7 @@
 - (instancetype)copy
 {
     CVMShadowLayoutAttributes * attrs = [super copy];
+    
     [attrs setDisplayShadow:[self displayShadow]];
     
     return attrs;
