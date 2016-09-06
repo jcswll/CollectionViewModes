@@ -8,8 +8,9 @@
 
 #import "CVMCollectionDataSource.h"
 #import "CVMMarketCell.h"
+#import "CVMMarketTableController.h"
 
-static NSString * const kMarketCellNibName = @"MarketCell";
+static NSString * const kMarketCellNibName = @"CVMMarketCell";
 static NSString * const kMarketCellReuseIdentifier = @"MarketCell";
 
 typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
@@ -25,7 +26,8 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
 
 @implementation CVMCollectionDataSource
 {
-    NSMutableArray * names;
+    NSArray<NSString *> * names;
+    NSMutableArray<CVMMarketTableController *> * tables;
 }
 
 + (instancetype)dataSourceForView:(UICollectionView *)collectionView
@@ -38,14 +40,19 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
     self = [super init];
     if( !self ) return nil;
     
-    names = [@[@"Groceria Abbandando",
+    names = @[@"Groceria Abbandando",
                @"Mercado de Luis",
                @"Klaus Lebensmittelmarkt",
                @"Épicerie Pierre",
                @"Doyle's Grocery",
                @"Hans supermarkt",
                @"Mercearia de João",
-               @"प्रसाद की किराने की दुकान"] mutableCopy];
+               @"प्रसाद की किराने की दुकान"];
+    
+    tables = [NSMutableArray array];
+    for( NSString * name in names ){
+        [tables addObject:[[CVMMarketTableController alloc] initWithMarketName:name]];
+    }
 
     // Use identity transform until item movement actually occurs.
     _postMovementIndexPathTransform = ^NSIndexPath * (NSIndexPath * path){
@@ -73,7 +80,7 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
 - (NSInteger)collectionView:(UICollectionView *)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
-    return [names count];
+    return [tables count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView
@@ -83,7 +90,8 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
                                                                      forIndexPath:indexPath];
     NSUInteger itemIndex = [indexPath item];
     
-    [[cell name] setText:names[itemIndex]];
+    CVMMarketTableController * tableController = tables[itemIndex];
+    [cell setTableView:[tableController tableView]];
     [cell layoutIfNeeded];
 
     return cell;
@@ -95,10 +103,10 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
 {
     NSUInteger sourceIndex = [sourceIndexPath row];
     NSUInteger destinationIndex = [destinationIndexPath row];
-    NSString * movingItem = names[sourceIndex];
+    CVMMarketTableController * movingItem = tables[sourceIndex];
     
-    [names removeObjectAtIndex:sourceIndex];
-    [names insertObject:movingItem atIndex:destinationIndex];
+    [tables removeObjectAtIndex:sourceIndex];
+    [tables insertObject:movingItem atIndex:destinationIndex];
     
     [self setPostMovementIndexPathTransform:^NSIndexPath * (NSIndexPath * path){
         

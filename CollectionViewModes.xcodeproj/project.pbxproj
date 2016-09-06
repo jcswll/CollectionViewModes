@@ -7,11 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03542EA61D7E26A200358D29 /* CVMMarketTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 03542EA51D7E26A200358D29 /* CVMMarketTableController.m */; };
+		03542EA91D7E282800358D29 /* CVMMarketItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03542EA81D7E282800358D29 /* CVMMarketItemCell.m */; };
+		03542EAB1D7E289500358D29 /* CVMMarketItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03542EAA1D7E289500358D29 /* CVMMarketItemCell.xib */; };
+		0356048A1D7E2EA90082E6AD /* CVMMarketTableHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 035604891D7E2EA90082E6AD /* CVMMarketTableHeader.xib */; };
 		03E844471D67FB7700760AE0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844461D67FB7700760AE0 /* main.m */; };
 		03E8444A1D67FB7700760AE0 /* CVMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844491D67FB7700760AE0 /* CVMAppDelegate.m */; };
 		03E844521D67FB7700760AE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 03E844511D67FB7700760AE0 /* Assets.xcassets */; };
 		03E844551D67FB7700760AE0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 03E844531D67FB7700760AE0 /* LaunchScreen.storyboard */; };
-		03E8445D1D6801D800760AE0 /* MarketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E8445C1D6801D800760AE0 /* MarketCell.xib */; };
+		03E8445D1D6801D800760AE0 /* CVMMarketCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 03E8445C1D6801D800760AE0 /* CVMMarketCell.xib */; };
 		03E844601D6802B000760AE0 /* CVMMarketCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E8445F1D6802B000760AE0 /* CVMMarketCell.m */; };
 		03E844631D681FAE00760AE0 /* CVMOverviewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844621D681FAE00760AE0 /* CVMOverviewLayout.m */; };
 		03E844661D6D42B800760AE0 /* CVMFullscreenLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 03E844651D6D42B800760AE0 /* CVMFullscreenLayout.m */; };
@@ -36,6 +40,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		03542EA41D7E26A200358D29 /* CVMMarketTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMMarketTableController.h; sourceTree = "<group>"; };
+		03542EA51D7E26A200358D29 /* CVMMarketTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMMarketTableController.m; sourceTree = "<group>"; };
+		03542EA71D7E282800358D29 /* CVMMarketItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMMarketItemCell.h; sourceTree = "<group>"; };
+		03542EA81D7E282800358D29 /* CVMMarketItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMMarketItemCell.m; sourceTree = "<group>"; };
+		03542EAA1D7E289500358D29 /* CVMMarketItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CVMMarketItemCell.xib; sourceTree = "<group>"; };
+		035604891D7E2EA90082E6AD /* CVMMarketTableHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CVMMarketTableHeader.xib; sourceTree = "<group>"; };
 		03E844421D67FB7700760AE0 /* CollectionViewModes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CollectionViewModes.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		03E844461D67FB7700760AE0 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		03E844481D67FB7700760AE0 /* CVMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CVMAppDelegate.h; sourceTree = "<group>"; };
@@ -43,7 +53,7 @@
 		03E844511D67FB7700760AE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		03E844541D67FB7700760AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		03E844561D67FB7700760AE0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		03E8445C1D6801D800760AE0 /* MarketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketCell.xib; sourceTree = "<group>"; };
+		03E8445C1D6801D800760AE0 /* CVMMarketCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CVMMarketCell.xib; sourceTree = "<group>"; };
 		03E8445E1D6802B000760AE0 /* CVMMarketCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMMarketCell.h; sourceTree = "<group>"; };
 		03E8445F1D6802B000760AE0 /* CVMMarketCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CVMMarketCell.m; sourceTree = "<group>"; };
 		03E844611D681FAE00760AE0 /* CVMOverviewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CVMOverviewLayout.h; sourceTree = "<group>"; };
@@ -120,9 +130,15 @@
 				03E844651D6D42B800760AE0 /* CVMFullscreenLayout.m */,
 				03E8445E1D6802B000760AE0 /* CVMMarketCell.h */,
 				03E8445F1D6802B000760AE0 /* CVMMarketCell.m */,
+				03542EA41D7E26A200358D29 /* CVMMarketTableController.h */,
+				03542EA51D7E26A200358D29 /* CVMMarketTableController.m */,
+				03542EA71D7E282800358D29 /* CVMMarketItemCell.h */,
+				03542EA81D7E282800358D29 /* CVMMarketItemCell.m */,
+				03542EAA1D7E289500358D29 /* CVMMarketItemCell.xib */,
+				035604891D7E2EA90082E6AD /* CVMMarketTableHeader.xib */,
 				03E844CE1D7549C700760AE0 /* CVMShadowLayoutAttributes.h */,
 				03E844CF1D7549C700760AE0 /* CVMShadowLayoutAttributes.m */,
-				03E8445C1D6801D800760AE0 /* MarketCell.xib */,
+				03E8445C1D6801D800760AE0 /* CVMMarketCell.xib */,
 				03E8448C1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.h */,
 				03E8448D1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m */,
 				03E844511D67FB7700760AE0 /* Assets.xcassets */,
@@ -236,9 +252,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03E8445D1D6801D800760AE0 /* MarketCell.xib in Resources */,
+				03E8445D1D6801D800760AE0 /* CVMMarketCell.xib in Resources */,
 				03E844551D67FB7700760AE0 /* LaunchScreen.storyboard in Resources */,
+				0356048A1D7E2EA90082E6AD /* CVMMarketTableHeader.xib in Resources */,
 				03E8448B1D73A94000760AE0 /* CVMCollectionViewController.xib in Resources */,
+				03542EAB1D7E289500358D29 /* CVMMarketItemCell.xib in Resources */,
 				03E844521D67FB7700760AE0 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -257,9 +275,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03542EA91D7E282800358D29 /* CVMMarketItemCell.m in Sources */,
 				03E8444A1D67FB7700760AE0 /* CVMAppDelegate.m in Sources */,
 				03E844601D6802B000760AE0 /* CVMMarketCell.m in Sources */,
 				03E844631D681FAE00760AE0 /* CVMOverviewLayout.m in Sources */,
+				03542EA61D7E26A200358D29 /* CVMMarketTableController.m in Sources */,
 				03E8448E1D73AEC700760AE0 /* UIView+WSSSimpleConstraints.m in Sources */,
 				03E844D01D7549C700760AE0 /* CVMShadowLayoutAttributes.m in Sources */,
 				03E8446B1D6E73BE00760AE0 /* CVMCollectionDataSource.m in Sources */,
@@ -459,6 +479,7 @@
 				03E8452A1D77811F00760AE0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

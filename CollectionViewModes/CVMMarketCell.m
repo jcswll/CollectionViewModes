@@ -27,7 +27,7 @@
 
 - (void)prepareForReuse
 {
-    [[self name] setText:@""];
+    [[self tableView] removeFromSuperview];
     [self setDisplaysShadow:NO];
 }
 
@@ -40,6 +40,17 @@
     // Shadow value retrieved before passing up just in case super does something stupid with the attributes object
     [super applyLayoutAttributes:layoutAttrs];
     [self setDisplaysShadow:displayShadow];
+}
+
+- (void)setTableView:(UIView *)tableView
+{
+    [_tableView removeFromSuperview];
+    
+    _tableView = tableView;
+    
+    [[self contentView] addSubview:_tableView];
+    [_tableView WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
+    [_tableView WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
 }
 
 - (void)setDisplaysShadow:(BOOL)doesDisplay

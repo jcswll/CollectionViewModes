@@ -10,6 +10,6 @@
 
 @interface CVMMarketCell : UICollectionViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel * name;
+@property (weak, nonatomic, nullable) UIView * tableView;
 
 @end
