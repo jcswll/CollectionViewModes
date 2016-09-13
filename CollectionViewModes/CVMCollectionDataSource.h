@@ -12,6 +12,8 @@
 
 + (instancetype)dataSourceForView:(UICollectionView *)collectionView;
 
+@property (assign, nonatomic, getter=isInOverview) BOOL inOverview;
+
 /** The new location of the given index path after items have been rearranged. */
 - (NSIndexPath *)pathAfterMovementForIndexPath:(NSIndexPath *)path;
 

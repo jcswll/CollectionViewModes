@@ -92,6 +92,7 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
     CVMMarketTableController * tableController = tables[itemIndex];
     UIView * tableView = [tableController tableView];
 
+    [cell setInOverview:[self isInOverview]];
     [cell setTableView:tableView];
     
     return cell;

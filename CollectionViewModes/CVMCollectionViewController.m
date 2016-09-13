@@ -47,6 +47,7 @@
     [controller setCollectionView:collectionView];
     [[controller itemMovementRecognizer] setEnabled:NO];
     [controller setInOverview:NO];
+    [dataSource setInOverview:NO];
     [controller setFullscreenLayout:fullscreenLayout];
     [controller setOverviewLayout:overviewLayout];
     [controller setDataSource:dataSource];
@@ -77,6 +78,7 @@
 {
     BOOL enteringOverview = ![self isInOverview];
     [self setInOverview:enteringOverview];
+    [[self dataSource] setInOverview:enteringOverview];
 
     UICollectionViewFlowLayout * newLayout = enteringOverview ? [self overviewLayout] : [self fullscreenLayout];
     

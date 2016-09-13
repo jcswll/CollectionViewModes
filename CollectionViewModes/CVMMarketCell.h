@@ -11,5 +11,6 @@
 @interface CVMMarketCell : UICollectionViewCell
 
 @property (weak, nonatomic, nullable) UIView * tableView;
+@property (assign, nonatomic, getter=isInOverview) BOOL inOverview;
 
 @end

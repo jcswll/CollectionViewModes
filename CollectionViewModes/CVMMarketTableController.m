@@ -97,6 +97,7 @@ static NSString * const kMarketHeaderNibName = @"CVMMarketTableHeader";
     
     NSUInteger row = [indexPath row];
     [[cell name] setText:items[row]];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     return cell;
 }
