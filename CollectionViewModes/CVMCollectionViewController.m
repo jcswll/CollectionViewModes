@@ -75,12 +75,13 @@
 
 - (IBAction)toggleLayout
 {
-    UICollectionViewFlowLayout * newLayout = [self isInOverview] ? [self fullscreenLayout] : [self overviewLayout];
+    BOOL enteringOverview = ![self isInOverview];
+    [self setInOverview:enteringOverview];
 
-    [self setInOverview:![self isInOverview]];
-
+    UICollectionViewFlowLayout * newLayout = enteringOverview ? [self overviewLayout] : [self fullscreenLayout];
+    
     [[self collectionView] setCollectionViewLayout:newLayout animated:YES];
-    [[self itemMovementRecognizer] setEnabled:[self isInOverview]];
+    [[self itemMovementRecognizer] setEnabled:enteringOverview];
 }
 
 - (UILongPressGestureRecognizer *)itemMovementRecognizer

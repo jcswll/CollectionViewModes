@@ -89,11 +89,11 @@ typedef NSIndexPath * (^IndexPathTransform)(NSIndexPath *);
     CVMMarketCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:kMarketCellReuseIdentifier
                                                                      forIndexPath:indexPath];
     NSUInteger itemIndex = [indexPath item];
-    
     CVMMarketTableController * tableController = tables[itemIndex];
-    [cell setTableView:[tableController tableView]];
-    [cell layoutIfNeeded];
+    UIView * tableView = [tableController tableView];
 
+    [cell setTableView:tableView];
+    
     return cell;
 }
 

@@ -27,7 +27,7 @@
 
 - (void)prepareForReuse
 {
-    [[self tableView] removeFromSuperview];
+    [super prepareForReuse]; 
     [self setDisplaysShadow:NO];
 }
 
@@ -44,13 +44,12 @@
 
 - (void)setTableView:(UIView *)tableView
 {
-    [_tableView removeFromSuperview];
-    
     _tableView = tableView;
     
     [[self contentView] addSubview:_tableView];
     [_tableView WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
     [_tableView WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
+    [_tableView setUserInteractionEnabled:![self isInOverview]];
 }
 
 - (void)setDisplaysShadow:(BOOL)doesDisplay
