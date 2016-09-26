@@ -41,6 +41,7 @@
     // Shadow value retrieved before passing up just in case super does something stupid with the attributes object
     [super applyLayoutAttributes:layoutAttrs];
     [self setDisplaysShadow:displayShadow];
+    [self layoutIfNeeded];
 }
 
 - (void)setTableView:(UIView *)tableView
@@ -51,6 +52,9 @@
     [_tableView WSSCenterInSuperviewInDirections:WSSConstraintDirectionAll];
     [_tableView WSSFitToSuperviewInDirections:WSSConstraintDirectionAll];
     [_tableView setUserInteractionEnabled:![self isInOverview]];
+    if( [_tableView respondsToSelector:@selector(setShowsVerticalScrollIndicator:)] ){
+        [(UITableView *)_tableView setShowsVerticalScrollIndicator:![self isInOverview]];
+    }
 }
 
 - (void)setDisplaysShadow:(BOOL)doesDisplay

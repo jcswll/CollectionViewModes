@@ -76,14 +76,20 @@
 
 - (IBAction)toggleLayout
 {
+    [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+    
     BOOL enteringOverview = ![self isInOverview];
     [self setInOverview:enteringOverview];
     [[self dataSource] setInOverview:enteringOverview];
 
     UICollectionViewFlowLayout * newLayout = enteringOverview ? [self overviewLayout] : [self fullscreenLayout];
     
-    [[self collectionView] setCollectionViewLayout:newLayout animated:YES];
-    [[self itemMovementRecognizer] setEnabled:enteringOverview];
+    [[self collectionView] setCollectionViewLayout:newLayout
+                                          animated:YES
+                                        completion:^(BOOL finished) {
+                                            [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+                                            [[self itemMovementRecognizer] setEnabled:enteringOverview];
+                                        }];
 }
 
 - (UILongPressGestureRecognizer *)itemMovementRecognizer
@@ -156,8 +162,7 @@
     [[self fullscreenLayout] updatePageIndex];
 }
 
-- (void)collectionView:(UICollectionView *)collectionView
-        didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if( ![self isInOverview] ) return;
 
